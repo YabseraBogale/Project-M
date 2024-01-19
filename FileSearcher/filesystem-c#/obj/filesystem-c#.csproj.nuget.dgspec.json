@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/yabsera/Documents/Github/Project-M/filesystem-c#/filesystem-c#.csproj": {}
+    "/home/yabsera/Documents/Github/Project-M/FileSearcher/filesystem-c#/filesystem-c#.csproj": {}
   },
   "projects": {
-    "/home/yabsera/Documents/Github/Project-M/filesystem-c#/filesystem-c#.csproj": {
+    "/home/yabsera/Documents/Github/Project-M/FileSearcher/filesystem-c#/filesystem-c#.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/yabsera/Documents/Github/Project-M/filesystem-c#/filesystem-c#.csproj",
+        "projectUniqueName": "/home/yabsera/Documents/Github/Project-M/FileSearcher/filesystem-c#/filesystem-c#.csproj",
         "projectName": "filesystem-c#",
-        "projectPath": "/home/yabsera/Documents/Github/Project-M/filesystem-c#/filesystem-c#.csproj",
+        "projectPath": "/home/yabsera/Documents/Github/Project-M/FileSearcher/filesystem-c#/filesystem-c#.csproj",
         "packagesPath": "/home/yabsera/.nuget/packages/",
-        "outputPath": "/home/yabsera/Documents/Github/Project-M/filesystem-c#/obj/",
+        "outputPath": "/home/yabsera/Documents/Github/Project-M/FileSearcher/filesystem-c#/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/yabsera/.nuget/NuGet/NuGet.Config"
