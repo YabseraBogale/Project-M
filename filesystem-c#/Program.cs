@@ -1,6 +1,2 @@
-﻿Console.Write("Enter Name Of File: ");
-
-string? name=Console.ReadLine();
-
-var exists=File.Exists("./"+name);
-Console.WriteLine(exists);
+﻿var fullpath=Path.GetFullPath(".");
+Console.WriteLine(fullpath?.ToString());
