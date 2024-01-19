@@ -1,19 +1,13 @@
 package main
 
-import (
-	"os"
-	"strings"
-)
+import "os"
 
 func main() {
-
-	dir, err := os.Getwd()
+	dir, err := os.ReadDir(".")
 	if err != nil {
 
 	}
-	var listdir []string = strings.Split(dir, "/")
-	for i := 0; i < len(listdir); i++ {
-		println(listdir[i])
+	for _, name := range dir {
+		print(name)
 	}
-
 }
