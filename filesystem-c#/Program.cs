@@ -1,2 +1,6 @@
-﻿var fullpath=Path.GetFullPath(".");
-Console.WriteLine(fullpath?.ToString());
+﻿IEnumerable<string> p=Directory.EnumerateDirectories(".");
+
+foreach(string i in p){
+    Console.WriteLine(i);
+}
+
