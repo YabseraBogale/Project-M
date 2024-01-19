@@ -1,4 +1,6 @@
-﻿var exits=File.Exists("./filesystem-c#.sln");
-var parentDir=Path.GetFullPath("..");
-Console.WriteLine(exits.ToString());
-Console.WriteLine(parentDir.ToString());
+﻿Console.Write("Enter Name Of File: ");
+
+string? name=Console.ReadLine();
+
+var exists=File.Exists("./"+name);
+Console.WriteLine(exists);
