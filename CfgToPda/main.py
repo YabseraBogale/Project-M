@@ -1,5 +1,5 @@
-class CFGtoPDAConverter:
-    def init(self, cfg):
+class CFGtoPDAConverter():
+    def __init__(self, cfg):
         self.cfg = cfg
         self.pda_states = set()
         self.pda_alphabet = set()
