@@ -1,14 +1,15 @@
 #include<iostream>
 #include<filesystem>
-#include<fstream>
 int main(){
     std::string filename="Readme.md";
     //std::getline(std::cin,filename);
     bool exist=std::filesystem::exists(filename);
     if(exist==true){
-        std::cout<<std::filesystem::current_path()<<std::endl;
-    } else{
         
+    } else{
+        for(auto &dir: std::filesystem::directory_iterator("..")){
+                std::cout<<dir.path()<<std::endl;
+        }
     }
     return 0;
 }
