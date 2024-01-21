@@ -4,7 +4,8 @@
     } else if(Directory.EnumerateDirectories(".").Any()){
         IEnumerable<string> ListOfDir=Directory.EnumerateDirectories(".");
         foreach(string i in ListOfDir){
-            if(Finder(i)==true){
+            Console.WriteLine(String.Format($"{i}"));
+            if(Finder(String.Format($"i/{name}"))==true){
                 return true;
             }
             
