@@ -1,19 +1,4 @@
-﻿static bool Finder(string? name){
-    if(File.Exists(String.Format($"{name}"))){
-        return true;
-    } else if(Directory.EnumerateDirectories(".").Count()>2){
-        IEnumerable<string> ListOfDir=Directory.EnumerateDirectories(".");
-        foreach(string i in ListOfDir){
-            Console.WriteLine(String.Format($"{i}"));
-            if(Finder(String.Format($"i/{name}"))==true){
-                return true;
-            }
-            
-        }
-    }
-    return false;
-}
-
+﻿
 
 
 
@@ -21,10 +6,6 @@
 
 
 //Console.Write("Enter File Name: ");
-string name = "README";
+string name = "Hello World";
 
-//Console.WriteLine(Finder(name));
-IEnumerable<string> pp=Directory.EnumerateDirectories("./Folder");
-foreach(string i in pp){
-    Console.WriteLine(i);
-}
+Console.WriteLine(Finder(name));
