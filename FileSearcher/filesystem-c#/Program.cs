@@ -1,12 +1,11 @@
 ﻿static bool Finder(string? name){
     if(File.Exists(String.Format($"{name}"))){
         return true;
-    } else if(Directory.EnumerateDirectories(name).Any()){
-        IEnumerable<string> ListOfDir=Directory.EnumerateDirectories(name);
+    } else if(Directory.EnumerateDirectories(String.Format($"./{name}")).Any()){
+        IEnumerable<string> ListOfDir=Directory.EnumerateDirectories(String.Format($"./{name}"));
         foreach(string i in ListOfDir){
-            if(Finder(String.Format($"{i}/{name}"))==true){
-                return true;
-            }
+            
+            Console.WriteLine(String.Format($"{i}/{name}"));
         }
     }
     return false;
