@@ -1,14 +1,15 @@
-﻿string Finder(string? name){
-    string path=String.Format($"./{name}");
-    if(File.Exists(path)){
-        return path;
-    } else{
-        IEnumerable<string> ListOfDir=Directory.EnumerateDirectories(path);
+﻿static bool Finder(string? name){
+    if(File.Exists(String.Format($"{name}"))){
+        return true;
+    } else if(Directory.EnumerateDirectories(name).Any()){
+        IEnumerable<string> ListOfDir=Directory.EnumerateDirectories(name);
         foreach(string i in ListOfDir){
-            Console.WriteLine(i);
+            if(Finder(String.Format($"{i}/{name}"))==true){
+                return true;
+            }
         }
     }
-    return "Done";
+    return false;
 }
 
 
@@ -17,7 +18,7 @@
 
 
 
-Console.Write("Enter File Name: ");
-string? name = Console.ReadLine();
+//Console.Write("Enter File Name: ");
+string name = "README";
 
 Console.WriteLine(Finder(name));
