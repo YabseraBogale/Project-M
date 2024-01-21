@@ -23,4 +23,8 @@
 //Console.Write("Enter File Name: ");
 string name = "README";
 
-Console.WriteLine(Finder(name));
+//Console.WriteLine(Finder(name));
+IEnumerable<string> pp=Directory.EnumerateDirectories("./Folder");
+foreach(string i in pp){
+    Console.WriteLine(i);
+}
