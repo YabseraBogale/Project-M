@@ -1,7 +1,7 @@
 ﻿static bool Finder(string? name){
     if(File.Exists(String.Format($"{name}"))){
         return true;
-    } else if(Directory.EnumerateDirectories(".").Any()){
+    } else if(Directory.EnumerateDirectories(".").Count()>2){
         IEnumerable<string> ListOfDir=Directory.EnumerateDirectories(".");
         foreach(string i in ListOfDir){
             Console.WriteLine(String.Format($"{i}"));
