@@ -5,9 +5,14 @@ int main(){
     std::string filename="Hello World.txt";
     for(auto &i: std::filesystem::directory_iterator(".")){
         if(i.is_directory()){
-            //DIR *k;
-            std::cout<<i.path()<<std::endl;
-            //k=opendir();
+            DIR *k;
+            k=opendir(i.path().c_str());
+            while(k!=NULL){
+                struct dirent *name;
+                while((name=readdir(k))!=NULL){
+                    std::cout<<name->d_name<<std::endl;
+                }
+            }
             
         }
     }
