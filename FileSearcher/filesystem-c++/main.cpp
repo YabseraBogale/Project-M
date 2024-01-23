@@ -10,9 +10,9 @@ int main(){
             while(k!=NULL){
                 struct dirent *name;
                 while((name=readdir(k))!=NULL){
-                    std::cout<<name->d_name<<std::endl;
+                    std::cout<<name->d_ino<<std::endl;
                 }
-                closedir(k);
+                
             }
             
         }
