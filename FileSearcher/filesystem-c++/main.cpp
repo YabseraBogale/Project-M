@@ -1,9 +1,15 @@
 #include<iostream>
 #include<filesystem>
+#include "dirent.h"
 int main(){
     std::string filename="Hello World.txt";
     for(auto &i: std::filesystem::directory_iterator(".")){
-        std::cout<<i.is_directory()<<std::endl;
+        if(i.is_directory()){
+            //DIR *k;
+            std::cout<<i.path()<<std::endl;
+            //k=opendir();
+            
+        }
     }
     return 0;
 }
