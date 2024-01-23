@@ -12,6 +12,7 @@ int main(){
                 while((name=readdir(k))!=NULL){
                     std::cout<<name->d_name<<std::endl;
                 }
+                closedir(k);
             }
             
         }
