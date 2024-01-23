@@ -7,7 +7,7 @@ public class CFGtoPDAConverter {
     private Set<String> pdaStates;
     private Set<Character> pdaAlphabet;
     private Set<Character> pdaStackAlphabet;
-    private Set<PDATransition> pdaTransitions;
+    private Set<String> pdaTransitions;
     private String pdaStartState;
     private Character pdaStackStartSymbol;
     private Set<String> pdaAcceptStates;
@@ -30,7 +30,7 @@ public class CFGtoPDAConverter {
         // Extract non-terminals, terminals, and productions from the CFG
         Set<String> nonTerminals = cfg.keySet();
         Set<Character> terminals = new HashSet<>();
-        Set<Production> productions = new HashSet<>();
+        Set<String> productions = new HashSet<>();
 
         for (String nonTerminal : cfg.keySet()) {
             for (String expr : cfg.get(nonTerminal)) {
@@ -38,7 +38,7 @@ public class CFGtoPDAConverter {
                     if (Character.isLowerCase(symbol)) {
                         terminals.add(symbol);
                     }
-                    productions.add(new Production(nonTerminal, expr.toCharArray()));
+                    productions.add(new String(nonTerminal, expr.toCharArray()));
                 }
             }
         }
@@ -63,11 +63,11 @@ public class CFGtoPDAConverter {
 
         // Add transitions for acceptance and rejection
         for (char terminal : pdaAlphabet) {
-            pdaTransitions.add(new PDATransition("S", new char[]{terminal, 'S'}));
-            pdaTransitions.add(new PDATransition("S", new char[]{terminal}));
-            pdaTransitions.add(new PDATransition("S", new char[]{}));
-            pdaTransitions.add(new PDATransition("S", new char[]{terminal}, "q_accept"));
-            pdaTransitions.add(new PDATransition("S", new char[]{terminal}, "q_reject"));
+            pdaTransitions.add(new String("S", new char[]{terminal, 'S'}));
+            pdaTransitions.add(new String("S", new char[]{terminal}));
+            pdaTransitions.add(new String("S", new char[]{}));
+            pdaTransitions.add(new String("S", new char[]{terminal}, "q_accept"));
+            pdaTransitions.add(new String("S", new char[]{terminal}, "q_reject"));
         }
     }
 
@@ -94,4 +94,4 @@ public class CFGtoPDAConverter {
         // Display PDA details
         converter.displayPDA();
     }
-
+}
