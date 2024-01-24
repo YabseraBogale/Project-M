@@ -1,6 +1,8 @@
 package main
 
-import "io/ioutil"
+import (
+	"io/ioutil"
+)
 
 func main() {
 
@@ -9,7 +11,9 @@ func main() {
 
 	}
 	for _, i := range file {
-		println(i.Mode())
+		if i.IsDir() == true {
+			ioutil.ReadAll(i.Name())
+		}
 	}
 
 }
