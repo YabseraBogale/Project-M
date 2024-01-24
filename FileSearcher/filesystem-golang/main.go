@@ -8,6 +8,8 @@ func main() {
 	if err != nil {
 
 	}
-	println(file)
+	for _, i := range file {
+		println(i.Mode())
+	}
 
 }
