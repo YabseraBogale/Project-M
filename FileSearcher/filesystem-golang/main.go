@@ -8,7 +8,7 @@ func main() {
 
 	}
 	for _, i := range file {
-		List((i.Name()))
+		println(List((i.Name())))
 	}
 
 }
