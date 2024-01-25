@@ -8,6 +8,7 @@ func main() {
 
 	}
 	for _, i := range file {
+		println(i.Name())
 		println(List((i.Name())))
 	}
 
@@ -15,6 +16,7 @@ func main() {
 
 func List(name string) string {
 	if name == "done" {
+		println(name)
 		return "done"
 	}
 	file, err := ioutil.ReadDir(name)
@@ -25,8 +27,9 @@ func List(name string) string {
 	for _, i := range file {
 		if i.IsDir() == true {
 			println(i.Name())
-			return List(i.Name())
+			return List("./" + i.Name())
 		}
 	}
+	println(name)
 	return "done"
 }
