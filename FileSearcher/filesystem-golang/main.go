@@ -1,25 +1,17 @@
 package main
 
 import (
-	"io/ioutil"
-	"path"
+	"os"
 )
 
 func main() {
 
-	file, err := ioutil.ReadDir("./Folder")
+	file, err := os.ReadDir("./Folder")
 	if err != nil {
 
 	}
 	for _, i := range file {
-		println(path.Dir(i.Name()))
-		ff, err := ioutil.ReadDir(path.Dir(i.Name()))
-		if err != nil {
-
-		}
-		for _, j := range ff {
-			println(j.Name())
-		}
+		print(i.Name())
 	}
 
 }
