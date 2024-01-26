@@ -11,7 +11,13 @@ func main() {
 
 	}
 	for _, i := range file {
-		print(i.Name())
+		ff, err := os.ReadDir(i.Name())
+		if err != nil {
+		}
+		for _, i := range ff {
+			println(i.Name())
+			println(i.Info())
+		}
 	}
 
 }
