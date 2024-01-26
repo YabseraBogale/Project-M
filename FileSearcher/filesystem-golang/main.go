@@ -12,7 +12,7 @@ func main() {
 
 	}
 	for _, i := range file {
-
+		println(path.Dir(i.Name()))
 		ff, err := ioutil.ReadDir(path.Dir(i.Name()))
 		if err != nil {
 
