@@ -11,7 +11,6 @@ int main(){
                 struct dirent *name;
                 while((name=readdir(k))!=NULL){
                     std::cout<<name->d_name<<std::endl;
-                    closedir(k);
                 }
                 
             }
