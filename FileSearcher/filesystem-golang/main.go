@@ -15,8 +15,8 @@ func main() {
 		if err != nil {
 		}
 		for _, i := range ff {
-			println(i.Name())
-			println(i.Info())
+			println(i.IsDir())
+
 		}
 	}
 
