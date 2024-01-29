@@ -1,7 +1,11 @@
 package main
 
-import "time"
+import (
+	"strconv"
+	"time"
+)
 
 func main() {
-	println(time.Now())
+	tim := strconv.Itoa(time.Now().Hour()) + " " + strconv.Itoa(time.Now().Minute()) + " " + strconv.Itoa(time.Now().Second())
+	println(tim)
 }
