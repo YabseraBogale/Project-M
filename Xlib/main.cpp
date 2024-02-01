@@ -1,25 +1,16 @@
 #include<iostream>
-#include "xlib++/display.hpp"
-#include <unistd.h>
+#include <stdlib.h>
+#include <X11/Xlib.h>
+#include <X11/Xutil.h>
+#include <X11/Xos.h>
 
-int main(){
-    
-   // Open a display.
-  Display *d = XOpenDisplay(0);
-
-  if ( d )
-    {
-      // Create the window
-      Window w = XCreateWindow(d, DefaultRootWindow(d), 0, 0, 200,
-			       100, 0, CopyFromParent, CopyFromParent,
-			       CopyFromParent, 0, 0);
-
-      // Show the window
-      XMapWindow(d, w);
-      XFlush(d);
-
-      // Sleep long enough to see the window.
-      sleep(10);
-    }
+Display *display;
+int main()
+{
+  display = XOpenDisplay(NULL);
+  if (display == NULL) {
+    std::cout<< "Failure connecting to X Server";
+    std::exit(0);
+  }
   return 0;
 }
