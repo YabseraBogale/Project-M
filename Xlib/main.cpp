@@ -1,5 +1,5 @@
 #include<iostream>
-#include <X11/Xlib.h>
+
 #include <unistd.h>
 
 int main(){
