@@ -19,3 +19,7 @@ for resource in resources:
 
 data['Month'] = pd.to_datetime(data['Month'])
 data.set_index('Month', inplace=True)
+plt.plot(data)
+plt.xlabel('Year')
+plt.ylabel('Gas Price')
+plt.show()
