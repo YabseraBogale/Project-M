@@ -16,3 +16,6 @@ for resource in resources:
     if resource.tabular:
         data = pd.read_csv(resource.descriptor['path'])
         print (data)
+
+data['Month'] = pd.to_datetime(data['Month'])
+data.set_index('Month', inplace=True)
