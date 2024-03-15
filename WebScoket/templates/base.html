@@ -2,12 +2,13 @@
 <html>
   <head>
     <title>Flask-Sock Demo</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
   </head>
   <body>
     <h1>Flask-Sock Demo</h1>
     <div id="log"></div>
     <br>
-    <form id="form">
+    <form id="form" action="{{ur_for('/')}}">
       <label for="text">Input: </label>
       <input type="text" id="text" autofocus>
     </form>
@@ -16,11 +17,11 @@
         document.getElementById('log').innerHTML += `<span style="color: ${color}">${text}</span><br>`;
       };
 
-      const socket = new WebSocket('ws://' + location.host + '/echo');
+      const socket = new WebSocket("http://127.0.0.1:5000");
       socket.addEventListener('message', ev => {
         log('<<< ' + ev.data, 'blue');
       });
-      document.getElementById('form').onsubmit = ev => {
+      document.getElementById('form').onsubmit = (ev) => {
         ev.preventDefault();
         const textField = document.getElementById('text');
         log('>>> ' + textField.value, 'red');
