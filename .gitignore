@@ -1,3 +1,4 @@
 WebScoket/env/
+WebScoket/__pycache__
 firebase/python/serviceAccountKey.json
 /__pycache__/
