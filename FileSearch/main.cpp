@@ -1,7 +1,8 @@
 #include<iostream>
+#include<pwd.h>
 #include<array>
 int main(){
-    auto p=popen("locate ~/*.txt","r");
+    auto p=popen("dir","r");
     std::array<char, 128> buffer;
     std::string result;
     if(!p){
