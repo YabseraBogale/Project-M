@@ -1,11 +1,5 @@
 #include<iostream>
-#include <unistd.h>
-#include <sys/types.h>
-#include<pwd.h>
 #include<array>
-
-struct passwd *pw = getpwuid(getuid());
-const char *homedir = pw->pw_dir;
 
 int main(){
     auto p=popen("dir","r");
