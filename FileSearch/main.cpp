@@ -1,27 +1,9 @@
 #include<iostream>
-#include<array>
+#include<filesystem>
 
 int main(){
-    auto p=popen("dir","r");
-    std::array<char, 128> buffer;
-    std::string result;
-    if(!p){
-        throw std::runtime_error("falied");
-    } else {
-        while(!feof(p)){
-            if(fgets(buffer.data(),buffer.size(),p)!=nullptr){
-                result+=buffer.data();
-            }
-        }
-        auto end=pclose(p);
-        if(end==EXIT_SUCCESS){
-
-            std::cout<<"ok\n"<<result;
-        }
-        else{
-            std::cout<<"not ok\n"<<result<<std::endl;
-        }
-    } 
+    auto pwd=std::filesystem::current_path();     
+    std::cout<<pwd<<std::endl;
     return 0;
 }
 
