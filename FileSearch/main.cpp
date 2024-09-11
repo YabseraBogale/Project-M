@@ -1,5 +1,5 @@
 #include<iostream>
-#include<pwd.h>
+
 #include<array>
 int main(){
     auto p=popen("dir","r");
