@@ -5,6 +5,14 @@ defmodule GuessingGame do
     # Please implement the compare/2 function
     "Correct"
   end
+  def compare(secret_number, guess) when secret_number-guess==1 do
+    # Please implement the compare/2 function
+    "So close"
+  end
+  def compare(secret_number, guess) when guess-secret_number==1 do
+    # Please implement the compare/2 function
+    "So close"
+  end
    def compare(secret_number, guess) when secret_number<guess do
     # Please implement the compare/2 function
     "Too high"
@@ -13,13 +21,6 @@ defmodule GuessingGame do
     # Please implement the compare/2 function
     "Too low"
   end
-  def compare(secret_number, guess) when secret_number-guess==1 do
-    # Please implement the compare/2 function
-    "So close"
-  end
-  def compare(secret_number, guess) when guess-secret_number==-1 do
-    # Please implement the compare/2 function
-    "So close"
-  end
+  
 end
 
