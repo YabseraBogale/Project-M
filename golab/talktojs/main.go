@@ -15,7 +15,7 @@ func hello(w http.ResponseWriter, r *http.Request) {
 				return
 			}
 			fmt.Fprintf(w, "post from website\n")
-			username := r.PathValue("Username")
+			username := r.FormValue("username")
 			fmt.Fprintf(w, "Name = %s\n", username)
 		default:
 			fmt.Fprintf(w, "Sorry, only GET and POST methods are supported.")
