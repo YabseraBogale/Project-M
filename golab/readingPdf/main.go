@@ -2,7 +2,10 @@ package main
 
 import (
 	"bufio"
+	"bytes"
+	"compress/zlib"
 	"fmt"
+	"io"
 	"log"
 	"os"
 	"strings"
@@ -31,8 +34,20 @@ func main() {
 		}
 
 	}
-	for _, i := range data {
-		fmt.Println(i)
+	b := bytes.NewReader(data)
+	r, err := zlib.NewReader(b)
+	if err != nil {
+		log.Println(err)
 	}
+	defer r.Close()
+	var out bytes.Buffer
+	_, err = io.Copy(&out, r)
+	if err != nil {
+		fmt.Println("Error decompressing data:", err)
+		return
+	}
+
+	// Output decompressed data
+	fmt.Println("Decompressed data:", out.String())
 
 }
