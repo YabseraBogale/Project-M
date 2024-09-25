@@ -40,14 +40,10 @@ func main() {
 		log.Println(err)
 	}
 	defer r.Close()
-	var out bytes.Buffer
-	_, err = io.Copy(&out, r)
+	enflated, err := io.ReadAll(r)
 	if err != nil {
-		fmt.Println("Error decompressing data:", err)
-		return
+		panic(err)
 	}
-
-	// Output decompressed data
-	fmt.Println("Decompressed data:", out.String())
+	fmt.Println(string(enflated))
 
 }
