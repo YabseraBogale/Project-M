@@ -3,7 +3,6 @@ package main
 import (
 	"bufio"
 	"compress/zlib"
-	"fmt"
 	"log"
 	"os"
 	"strings"
@@ -16,7 +15,7 @@ func main() {
 	}
 	scanner := bufio.NewScanner(strings.NewReader(string(file)))
 	count := 0
-
+	data := [][]byte{}
 	for scanner.Scan() {
 		line := scanner.Text()
 
@@ -31,7 +30,7 @@ func main() {
 			b := make([]byte, len(line))
 			for {
 				n, err := r.Read(b)
-				fmt.Println(string(b[:n]))
+				data = append(data, b[:n])
 				if err != nil {
 					return
 				}
@@ -43,5 +42,5 @@ func main() {
 		}
 
 	}
-
+	os.WriteFile("data.txt", data[0], 0777)
 }
