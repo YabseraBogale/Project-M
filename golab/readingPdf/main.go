@@ -11,7 +11,7 @@ func main() {
 	if err != nil {
 		log.Println(err)
 	}
-	for _, i := range file {
-		fmt.Println(i)
-	}
+	os.WriteFile("data.txt", file, 0777)
+
+	fmt.Println("file written successfully.")
 }
