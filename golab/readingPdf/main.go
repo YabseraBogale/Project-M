@@ -2,13 +2,11 @@ package main
 
 import (
 	"bufio"
-	"bytes"
-	"compress/zlib"
 	"fmt"
-	"io"
 	"log"
 	"os"
 	"strings"
+	"unicode/utf8"
 )
 
 func main() {
@@ -16,34 +14,19 @@ func main() {
 	if err != nil {
 		log.Println(err)
 	}
-	scanner := bufio.NewReader(strings.NewReader(string(file)))
-	var data []byte
+	scanner := bufio.NewScanner(strings.NewReader(string(file)))
 	count := 0
-	for i := 0; i < len(file); i++ {
-		line, _, err := scanner.ReadLine()
-		if err != nil {
-			log.Println(err)
-			break
-		}
-		if string(line) == "stream" {
+	for scanner.Scan() {
+		line := scanner.Text()
+
+		if line == "stream" {
 			count = 1
-		} else if count == 1 && string(line) != "endstream" {
-			data = append(data, line...)
-		} else if string(line) == "endstream" {
+		} else if count == 1 && line != "endstream" {
+			fmt.Println(utf8.DecodeLastRuneInString(line))
+		} else if line == "endstream" {
 			count = 0
 		}
 
 	}
-	b := bytes.NewReader(data)
-	r, err := zlib.NewReader(b)
-	if err != nil {
-		log.Println(err)
-	}
-	defer r.Close()
-	enflated, err := io.ReadAll(r)
-	if err != nil {
-		panic(err)
-	}
-	fmt.Println(string(enflated))
 
 }
