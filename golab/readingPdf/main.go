@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"fmt"
 	"log"
 	"os"
 	"strings"
@@ -30,6 +31,6 @@ func main() {
 		}
 
 	}
-	os.WriteFile("data.txt", data, 0777)
+	fmt.Println(len(data))
 
 }
