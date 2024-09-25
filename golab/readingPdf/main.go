@@ -31,6 +31,8 @@ func main() {
 		}
 
 	}
-	fmt.Println(len(data))
+	for _, i := range data {
+		fmt.Println(i)
+	}
 
 }
