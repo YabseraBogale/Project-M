@@ -1,10 +1,11 @@
 package main
 
 import (
-	"bytes"
+	"bufio"
 	"fmt"
 	"log"
 	"os"
+	"strings"
 )
 
 func main() {
@@ -12,10 +13,14 @@ func main() {
 	if err != nil {
 		log.Println(err)
 	}
-	os.WriteFile("data.txt", file, 0777)
-	//fmt.Println(string(file[8:9]) == "\n")
-	result := bytes.Split(file, []byte("stream"))
-	for _, i := range result {
-		fmt.Println(string(i))
+	scanner := bufio.NewReader(strings.NewReader(string(file)))
+	for i := 0; i < len(file); i++ {
+		line, _, err := scanner.ReadLine()
+		if err != nil {
+			log.Println(err)
+			break
+		}
+		fmt.Println(string(line))
+
 	}
 }
