@@ -12,7 +12,7 @@
 import re
 import zlib
 
-pdf = open("some_doc.pdf", "rb").read()
+pdf = open("sample.pdf", "rb").read()
 stream = re.compile(rb'.*?FlateDecode.*?stream(.*?)endstream', re.S)
 
 for s in stream.findall(pdf):
