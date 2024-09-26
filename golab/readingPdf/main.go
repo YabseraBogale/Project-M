@@ -30,7 +30,7 @@ func main() {
 			b := make([]byte, len(line))
 			for {
 				n, err := r.Read(b)
-				fmt.Println(string(b[:0]))
+				fmt.Println(string(b[:n]))
 				if err != nil {
 					return
 				}
