@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"regexp"
 	"compress/zlib"
 	"fmt"
 	"log"
@@ -30,7 +31,15 @@ func main() {
 			b := make([]byte, len(line))
 			for {
 				n, err := r.Read(b)
-				fmt.Println(string(b[:n]))
+				re := regexp.MustCompile(`<([^>]+)>`)
+				matches := re.FindAllStringSubmatch(string(b[:n]), -1)
+				var extracted []string
+				for _, match := range matches {
+				if len(match) > 1 {
+					extracted = append(extracted, match[1])
+					}
+				}
+				fmt.Println(extracted)
 				if err != nil {
 					return
 				}
