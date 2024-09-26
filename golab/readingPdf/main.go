@@ -16,7 +16,7 @@ func main() {
 	}
 	scanner := bufio.NewScanner(strings.NewReader(string(file)))
 	count := 0
-	yeah := ""
+	
 	for scanner.Scan() {
 
 		line := scanner.Text()
@@ -30,7 +30,7 @@ func main() {
 			b := make([]byte, len(line))
 			for {
 				n, err := r.Read(b)
-				yeah += string(b[:n])
+				fmt.Println(string(b[:0]))
 				if err != nil {
 					return
 				}
@@ -43,5 +43,5 @@ func main() {
 		}
 
 	}
-	fmt.Println(yeah)
+	
 }
