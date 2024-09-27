@@ -2,7 +2,6 @@ package main
 
 import (
 	"bufio"
-	"regexp"
 	"compress/zlib"
 	"fmt"
 	"log"
@@ -17,7 +16,7 @@ func main() {
 	}
 	scanner := bufio.NewScanner(strings.NewReader(string(file)))
 	count := 0
-	
+
 	for scanner.Scan() {
 
 		line := scanner.Text()
@@ -31,19 +30,10 @@ func main() {
 			b := make([]byte, len(line))
 			for {
 				n, err := r.Read(b)
-				re := regexp.MustCompile(`<([^>]+)>`)
-				matches := re.FindAllStringSubmatch(string(b[:n]), -1)
-				var extracted []string
-				for _, match := range matches {
-				if len(match) > 1 {
-					extracted = append(extracted, match[1])
-					}
-				}
-				fmt.Println(extracted)
+				fmt.Println(string(b[:n]))
 				if err != nil {
 					return
 				}
-
 			}
 
 		} else if line == "endstream" {
@@ -52,5 +42,5 @@ func main() {
 		}
 
 	}
-	
+
 }
