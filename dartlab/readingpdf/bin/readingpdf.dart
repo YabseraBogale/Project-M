@@ -1,5 +1,7 @@
-import 'package:readingpdf/readingpdf.dart' as readingpdf;
+import 'dart:io';
 
 void main(List<String> arguments) {
-  print('Hello world: ${readingpdf.calculate()}!');
+  String data =
+      String.fromCharCodes(File("sample.pdf").readAsBytesSync().toList());
+  print(data);
 }
