@@ -38,7 +38,6 @@ func main() {
 			}
 
 		} else if line == "endstream" {
-
 			count = 0
 		}
 
