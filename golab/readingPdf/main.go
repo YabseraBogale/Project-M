@@ -10,6 +10,7 @@ import (
 )
 
 func main() {
+
 	file, err := os.ReadFile("sample.pdf")
 	if err != nil {
 		log.Println(err)
