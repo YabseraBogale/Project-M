@@ -31,7 +31,7 @@ func main() {
 			b := make([]byte, len(line))
 			for {
 				n, err := r.Read(b)
-				fmt.Println(string(b[:n]))
+				fmt.Println(strings.Split(string(b[:n]), "56.8 704.989 Td /F1 12 Tf"))
 				if err != nil {
 					return
 				}
