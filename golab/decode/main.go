@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"strings"
-	"unicode/utf8"
 )
 
 func main() {
@@ -15,7 +14,7 @@ func main() {
 		data = append(data, HexaToBinary(i))
 	}
 	result := ReduceByteArray(data)
-	fmt.Println(utf8.DecodeRune(result))
+	fmt.Println(result)
 }
 
 func HexaToBinary(number string) []byte {
