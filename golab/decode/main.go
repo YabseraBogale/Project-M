@@ -1,7 +1,10 @@
 package main
 
 import (
+	"bytes"
+	"compress/zlib"
 	"fmt"
+	"log"
 	"strings"
 )
 
@@ -13,7 +16,18 @@ func main() {
 		data = append(data, HexaToBinary(i))
 	}
 	result := ReduceByteArray(data)
-	fmt.Println(result)
+	r, err := zlib.NewReader(bytes.NewReader(result))
+	if err != nil {
+		log.Println("first log", err)
+	}
+
+	for {
+		n, err := r.Read(result)
+		fmt.Println(result[:n])
+		if err != nil {
+			log.Println("second log", err)
+		}
+	}
 
 }
 
