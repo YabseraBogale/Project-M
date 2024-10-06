@@ -55,17 +55,19 @@ func main() {
 					}
 					defer res.Body.Close()
 					if res.StatusCode != 200 {
+						fmt.Println("connection lost")
 						return
 					}
 					size, err := io.Copy(file, res.Body)
 					if err != nil {
 						log.Println(err, "for", filename, "size", size/10000)
-						log.Println(src + h.ChildAttr("a", "href"))
 						err := os.Remove("Downloads/" + filename)
 						if err != nil {
 							log.Println(err)
 						}
 						return
+					} else {
+						fmt.Println("for", filename, "size", size/10000)
 					}
 
 				}
