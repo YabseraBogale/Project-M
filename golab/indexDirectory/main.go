@@ -27,7 +27,7 @@ func main() {
 
 	println("The Number Of Data Points", len(data[1:]))
 	var wg sync.WaitGroup
-	var numberOfMusic int
+
 	for _, i := range data[1:] {
 		wg.Add(1)
 		go func(src string) {
@@ -36,7 +36,6 @@ func main() {
 			muses.OnHTML("td", func(h *colly.HTMLElement) {
 				if strings.Count(h.ChildAttr("a", "href"), "mp3") >= 1 && h.ChildAttr("a", "href") != "/public/mp3/Muse/Albums%20(CD)/" {
 					fmt.Println(h.ChildAttr("a", "href"))
-					numberOfMusic += 1
 				}
 			})
 			err := muses.Visit(src)
@@ -48,5 +47,5 @@ func main() {
 
 	}
 	wg.Wait()
-	fmt.Println("All Operation are Completed and number of music is", numberOfMusic)
+	fmt.Println("All Operation are Completed")
 }
