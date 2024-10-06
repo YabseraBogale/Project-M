@@ -56,14 +56,14 @@ func main() {
 					defer res.Body.Close()
 					size, err := io.Copy(file, res.Body)
 					if err != nil {
-						log.Println(err, "for", filename)
+						log.Println(err, "for", filename, "size", size)
 						log.Println(src + h.ChildAttr("a", "href"))
 						err := os.Remove("Downloads/" + filename)
 						if err != nil {
 							log.Println(err)
 						}
 					}
-					fmt.Println("Downloaded a file", filename, " with size", size/100000)
+
 				}
 			})
 			err := muses.Visit(src)
