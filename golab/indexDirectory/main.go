@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"log"
+	"os"
 	"strings"
 	"sync"
 
@@ -35,8 +36,11 @@ func main() {
 			muses := colly.NewCollector()
 			muses.OnHTML("td", func(h *colly.HTMLElement) {
 				if strings.Count(h.ChildAttr("a", "href"), "mp3") >= 1 && h.ChildAttr("a", "href") != "/public/mp3/Muse/Albums%20(CD)/" {
-					filename := strings.ReplaceAll(h.ChildAttr("a", "href"), "%20", "")
-					fmt.Println(filename)
+					filename := strings.ReplaceAll(strings.ReplaceAll(strings.ReplaceAll(h.ChildAttr("a", "href"), "%20", " "), "%5b", ""), "%5d", "")
+					_, err := os.Create("Downloads/" + filename)
+					if err != nil {
+						log.Println(err)
+					}
 				}
 			})
 			err := muses.Visit(src)
