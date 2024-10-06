@@ -35,7 +35,8 @@ func main() {
 			muses := colly.NewCollector()
 			muses.OnHTML("td", func(h *colly.HTMLElement) {
 				if strings.Count(h.ChildAttr("a", "href"), "mp3") >= 1 && h.ChildAttr("a", "href") != "/public/mp3/Muse/Albums%20(CD)/" {
-					fmt.Println(h.ChildAttr("a", "href"))
+					filename := strings.ReplaceAll(h.ChildAttr("a", "href"), "%20", "")
+					fmt.Println(filename)
 				}
 			})
 			err := muses.Visit(src)
