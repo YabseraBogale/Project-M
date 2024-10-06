@@ -28,7 +28,6 @@ func main() {
 		log.Println(err)
 	}
 
-	println("The Number Of Data Points", len(data[1:]))
 	var wg sync.WaitGroup
 
 	for _, i := range data[1:] {
@@ -41,8 +40,9 @@ func main() {
 					filename := strings.ReplaceAll(strings.ReplaceAll(strings.ReplaceAll(h.ChildAttr("a", "href"), "%20", " "), "%5b", ""), "%5d", "")
 					file, err := os.Create("Downloads/" + filename)
 					if err != nil {
-						log.Println(err)
+						log.Println(err, "for", filename)
 					}
+					defer file.Close()
 					client := http.Client{
 						CheckRedirect: func(req *http.Request, via []*http.Request) error {
 							req.URL.Opaque = req.URL.Path
@@ -51,15 +51,19 @@ func main() {
 					}
 					res, err := client.Get(src + h.ChildAttr("a", "href"))
 					if err != nil {
-						log.Println(err)
+						log.Println(err, "for", filename)
 					}
 					defer res.Body.Close()
 					size, err := io.Copy(file, res.Body)
 					if err != nil {
-						log.Println(err)
+						log.Println(err, "for", filename)
+						log.Println(src + h.ChildAttr("a", "href"))
+						err := os.Remove("Downloads/" + filename)
+						if err != nil {
+							log.Println(err)
+						}
 					}
-					defer file.Close()
-					fmt.Println("Downloaded a file", filename, " with size", size)
+					fmt.Println("Downloaded a file", filename, " with size", size/100000)
 				}
 			})
 			err := muses.Visit(src)
