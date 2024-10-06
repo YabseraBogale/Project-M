@@ -2,7 +2,9 @@ package main
 
 import (
 	"fmt"
+	"io"
 	"log"
+	"net/http"
 	"os"
 	"strings"
 	"sync"
@@ -37,10 +39,27 @@ func main() {
 			muses.OnHTML("td", func(h *colly.HTMLElement) {
 				if strings.Count(h.ChildAttr("a", "href"), "mp3") >= 1 && h.ChildAttr("a", "href") != "/public/mp3/Muse/Albums%20(CD)/" {
 					filename := strings.ReplaceAll(strings.ReplaceAll(strings.ReplaceAll(h.ChildAttr("a", "href"), "%20", " "), "%5b", ""), "%5d", "")
-					_, err := os.Create("Downloads/" + filename)
+					file, err := os.Create("Downloads/" + filename)
 					if err != nil {
 						log.Println(err)
 					}
+					client := http.Client{
+						CheckRedirect: func(req *http.Request, via []*http.Request) error {
+							req.URL.Opaque = req.URL.Path
+							return nil
+						},
+					}
+					res, err := client.Get(src + h.ChildAttr("a", "href"))
+					if err != nil {
+						log.Println(err)
+					}
+					defer res.Body.Close()
+					size, err := io.Copy(file, res.Body)
+					if err != nil {
+						log.Println(err)
+					}
+					defer file.Close()
+					fmt.Println("Downloaded a file", filename, " with size", size)
 				}
 			})
 			err := muses.Visit(src)
