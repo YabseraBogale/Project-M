@@ -54,14 +54,18 @@ func main() {
 						log.Println(err, "for", filename)
 					}
 					defer res.Body.Close()
+					if res.StatusCode != 200 {
+						return
+					}
 					size, err := io.Copy(file, res.Body)
 					if err != nil {
-						log.Println(err, "for", filename, "size", size)
+						log.Println(err, "for", filename, "size", size/10000)
 						log.Println(src + h.ChildAttr("a", "href"))
 						err := os.Remove("Downloads/" + filename)
 						if err != nil {
 							log.Println(err)
 						}
+						return
 					}
 
 				}
