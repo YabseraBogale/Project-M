@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"log"
+	"sync"
 
 	"github.com/gocolly/colly"
 )
@@ -22,25 +23,27 @@ func main() {
 	if err != nil {
 		log.Println(err)
 	}
-	ch := make(chan string)
+
 	println("The Number Of Data Points", len(data[1:]))
+	var wg sync.WaitGroup
 	for _, i := range data[1:] {
+		wg.Add(1)
 		go func(src string) {
+			defer wg.Done()
 			muses := colly.NewCollector()
 			muses.OnHTML("td", func(h *colly.HTMLElement) {
-				ch <- h.ChildAttr("a", "href")
+				if h.ChildAttr("a", "href") != "" {
+					fmt.Println(h.ChildAttr("a", "href"))
+				}
 			})
 			err := muses.Visit(src)
 			if err != nil {
 				log.Println(err)
 			}
-			close(ch)
-		}(i)
-		for value := range ch {
-			if value != "" {
-				fmt.Println("Recived", value)
-			}
-		}
-	}
 
+		}(i)
+
+	}
+	wg.Wait()
+	fmt.Println("All Operation are Completed ?")
 }
