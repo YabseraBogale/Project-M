@@ -8,6 +8,7 @@ import (
 	"os"
 	"strings"
 	"sync"
+	"time"
 
 	"github.com/gocolly/colly"
 )
@@ -65,6 +66,7 @@ func main() {
 					req.URL.Opaque = req.URL.Path
 					return nil
 				},
+				Timeout: 60 * time.Second,
 			}
 			req, err := client.Get(src)
 			if err != nil {
@@ -79,7 +81,7 @@ func main() {
 			// Download the file
 			size, err := io.Copy(file, req.Body)
 			if err != nil {
-				log.Println("Error copying file data:", err)
+				log.Println(err)
 				return
 			} else {
 				mb := size / 100000
