@@ -37,40 +37,43 @@ func main() {
 			muses := colly.NewCollector()
 			muses.OnHTML("td", func(h *colly.HTMLElement) {
 				if strings.Count(h.ChildAttr("a", "href"), "mp3") >= 1 && h.ChildAttr("a", "href") != "/public/mp3/Muse/Albums%20(CD)/" {
-					filename := strings.ReplaceAll(strings.ReplaceAll(strings.ReplaceAll(h.ChildAttr("a", "href"), "%20", " "), "%5b", ""), "%5d", "")
-					file, err := os.Create("Downloads/" + filename)
-					fmt.Println(filename)
-					if err != nil {
-						log.Println(err, "for", filename)
-					}
-					defer file.Close()
-					client := http.Client{
-						CheckRedirect: func(req *http.Request, via []*http.Request) error {
-							req.URL.Opaque = req.URL.Path
-							return nil
-						},
-					}
-					res, err := client.Get(src + h.ChildAttr("a", "href"))
-					if err != nil {
-						log.Println(err, "for", filename)
-					}
-					defer res.Body.Close()
-					if res.StatusCode != http.StatusOK {
-						fmt.Println("connection lost")
-						return
-					}
-					size, err := io.Copy(file, res.Body)
-					if err != nil {
-						log.Println(err, "for", filename, "size", size/10000)
-						err := os.Remove("Downloads/" + filename)
+					if strings.Count(h.ChildAttr("a", "href"), "(2006%20Japanese%20Edition)") == 0 && strings.Count(h.ChildAttr("a", "href"), "(2000%20Japanese%20Edition)") == 0 {
+						filename := strings.ReplaceAll(strings.ReplaceAll(strings.ReplaceAll(h.ChildAttr("a", "href"), "%20", " "), "%5b", ""), "%5d", "")
+						file, err := os.Create("Downloads/" + filename)
+						fmt.Println(filename)
 						if err != nil {
-							log.Println(err)
+							log.Println(err, "for", filename)
 						}
-						return
-					} else {
-						fmt.Println("for", filename, "size", size/10000)
+						defer file.Close()
+						client := http.Client{
+							CheckRedirect: func(req *http.Request, via []*http.Request) error {
+								req.URL.Opaque = req.URL.Path
+								return nil
+							},
+						}
+						res, err := client.Get(src + h.ChildAttr("a", "href"))
+						if err != nil {
+							log.Println(err, "for", filename)
+						}
+						defer res.Body.Close()
+						if res.StatusCode != http.StatusOK {
+							fmt.Println("connection lost")
+							return
+						}
+						size, err := io.Copy(file, res.Body)
+						if err != nil {
+							log.Println(err, "for", filename, "size", size/10000)
+							err := os.Remove("Downloads/" + filename)
+							if err != nil {
+								log.Println(err)
+							}
+							return
+						} else {
+							fmt.Println("for", filename, "size", size/10000)
+						}
 					}
-
+				} else {
+					return
 				}
 			})
 			err := muses.Visit(src)
