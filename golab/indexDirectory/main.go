@@ -54,7 +54,7 @@ func main() {
 						log.Println(err, "for", filename)
 					}
 					defer res.Body.Close()
-					if res.StatusCode != 200 {
+					if res.StatusCode != http.StatusOK {
 						fmt.Println("connection lost")
 						return
 					}
