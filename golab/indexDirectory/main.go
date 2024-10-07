@@ -39,6 +39,7 @@ func main() {
 				if strings.Count(h.ChildAttr("a", "href"), "mp3") >= 1 && h.ChildAttr("a", "href") != "/public/mp3/Muse/Albums%20(CD)/" {
 					filename := strings.ReplaceAll(strings.ReplaceAll(strings.ReplaceAll(h.ChildAttr("a", "href"), "%20", " "), "%5b", ""), "%5d", "")
 					file, err := os.Create("Downloads/" + filename)
+					fmt.Println(filename)
 					if err != nil {
 						log.Println(err, "for", filename)
 					}
