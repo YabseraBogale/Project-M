@@ -82,7 +82,8 @@ func main() {
 				log.Println("Error copying file data:", err)
 				return
 			} else {
-				fmt.Println("file name", file, "with size", size/10000)
+				mb := size / 100000
+				fmt.Println("file name", filename, "with size", mb, "mb")
 			}
 
 		}(i, listOfLinkd[i])
