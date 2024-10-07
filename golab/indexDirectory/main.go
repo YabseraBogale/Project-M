@@ -72,7 +72,7 @@ func main() {
 			}
 			defer req.Body.Close()
 			if req.StatusCode != http.StatusOK {
-				log.Printf("Failed to download file: %s, Status Code: %d\n", filename, res.StatusCode)
+				log.Printf("Failed to download file: %s, Status Code: %d\n", filename, req.StatusCode)
 				return
 			}
 
