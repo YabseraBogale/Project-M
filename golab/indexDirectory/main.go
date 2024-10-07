@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"io"
 	"log"
@@ -51,7 +52,8 @@ func main() {
 
 	}
 	wg.Wait()
-
+	ctx, cancel := context.WithTimeout(context.Background(), 60*time.Second)
+	defer cancel()
 	for i := range listOfLinkd {
 		wg.Add(1)
 		go func(filename string, src string) {
@@ -66,26 +68,27 @@ func main() {
 					req.URL.Opaque = req.URL.Path
 					return nil
 				},
-				Timeout: 60 * time.Second,
 			}
-			req, err := client.Get(src)
+			req, err := http.NewRequestWithContext(ctx, http.MethodGet, src, nil)
 			if err != nil {
 				log.Println(err)
 			}
-			defer req.Body.Close()
-			if req.StatusCode != http.StatusOK {
-				log.Printf("Failed to download file: %s, Status Code: %d\n", filename, req.StatusCode)
+			res, err := client.Do(req)
+			if err != nil {
+				log.Println(err)
 				return
 			}
+			defer res.Body.Close()
 
-			// Download the file
-			size, err := io.Copy(file, req.Body)
+			if res.StatusCode != http.StatusOK {
+				log.Printf("failed to download file, status code: %d", res.StatusCode)
+			}
+			size, err := io.Copy(file, res.Body)
 			if err != nil {
-				log.Println(err)
-				return
+				log.Printf("failed to download file, status code: %d", res.StatusCode)
 			} else {
-				mb := size / 100000
-				fmt.Println("file name", filename, "with size", mb, "mb")
+				mb := size / 10000
+				fmt.Println(filename, mb, "mb")
 			}
 
 		}(i, listOfLinkd[i])
