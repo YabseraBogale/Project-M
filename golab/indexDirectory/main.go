@@ -29,7 +29,7 @@ func main() {
 	}
 
 	var wg sync.WaitGroup
-
+	listOfLinkd := make(map[string]string)
 	for _, i := range data[1:] {
 		wg.Add(1)
 		go func(src string) {
@@ -37,43 +37,8 @@ func main() {
 			muses := colly.NewCollector()
 			muses.OnHTML("td", func(h *colly.HTMLElement) {
 				if strings.Count(h.ChildAttr("a", "href"), "mp3") >= 1 && h.ChildAttr("a", "href") != "/public/mp3/Muse/Albums%20(CD)/" {
-					if strings.Count(h.ChildAttr("a", "href"), "(2006%20Japanese%20Edition)") == 0 && strings.Count(h.ChildAttr("a", "href"), "(2000%20Japanese%20Edition)") == 0 {
-						filename := strings.ReplaceAll(strings.ReplaceAll(strings.ReplaceAll(h.ChildAttr("a", "href"), "%20", " "), "%5b", ""), "%5d", "")
-						file, err := os.Create("Downloads/" + filename)
-						fmt.Println(filename)
-						if err != nil {
-							log.Println(err, "for", filename)
-						}
-						defer file.Close()
-						client := http.Client{
-							CheckRedirect: func(req *http.Request, via []*http.Request) error {
-								req.URL.Opaque = req.URL.Path
-								return nil
-							},
-						}
-						res, err := client.Get(src + h.ChildAttr("a", "href"))
-						if err != nil {
-							log.Println(err, "for", filename)
-						}
-						defer res.Body.Close()
-						if res.StatusCode != http.StatusOK {
-							fmt.Println("connection lost")
-							return
-						}
-						size, err := io.Copy(file, res.Body)
-						if err != nil {
-							log.Println(err, "for", filename, "size", size/10000)
-							err := os.Remove("Downloads/" + filename)
-							if err != nil {
-								log.Println(err)
-							}
-							return
-						} else {
-							fmt.Println("for", filename, "size", size/10000)
-						}
-					}
-				} else {
-					return
+					filename := strings.ReplaceAll(strings.ReplaceAll(strings.ReplaceAll(h.ChildAttr("a", "href"), "%20", " "), "%5b", ""), "%5d", "")
+					listOfLinkd[filename] = src + h.ChildAttr("a", "href")
 				}
 			})
 			err := muses.Visit(src)
@@ -85,5 +50,43 @@ func main() {
 
 	}
 	wg.Wait()
-	fmt.Println("All Operation are Completed")
+
+	for i := range listOfLinkd {
+		wg.Add(1)
+		go func(filename string, src string) {
+			defer wg.Done()
+			file, err := os.Create("Downloads/" + filename)
+			if err != nil {
+				log.Println(err)
+			}
+			defer file.Close()
+			client := http.Client{
+				CheckRedirect: func(req *http.Request, via []*http.Request) error {
+					req.URL.Opaque = req.URL.Path
+					return nil
+				},
+			}
+			req, err := client.Get(src)
+			if err != nil {
+				log.Println(err)
+			}
+			defer req.Body.Close()
+			if req.StatusCode != http.StatusOK {
+				log.Printf("Failed to download file: %s, Status Code: %d\n", filename, res.StatusCode)
+				return
+			}
+
+			// Download the file
+			size, err := io.Copy(file, req.Body)
+			if err != nil {
+				log.Println("Error copying file data:", err)
+				return
+			} else {
+				fmt.Println("file name", file, "with size", size/10000)
+			}
+
+		}(i, listOfLinkd[i])
+	}
+	wg.Wait()
+	fmt.Println("All Operation Completed")
 }
