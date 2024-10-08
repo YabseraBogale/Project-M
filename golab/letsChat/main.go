@@ -1,14 +1,22 @@
 package main
 
 import (
-	"fmt"
+	"log"
 	"net/http"
+	"text/template"
 )
 
 func main() {
-	http.Handle("/", http.FileServer(http.Dir("public")))
+
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Println(r.FormValue("message"))
+		temp, err := template.ParseFiles("public/index.html")
+		if err != nil {
+			log.Println(err)
+		}
+		err = temp.Execute(w, nil)
+		if err != nil {
+			log.Println(err)
+		}
 	})
 	http.ListenAndServe(":8080", nil)
 
