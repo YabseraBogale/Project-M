@@ -1,12 +1,12 @@
 package main
 
 import (
-	"net/http"
+	"github.com/labstack/echo/v4"
 )
 
 func main() {
-	file := http.FileServer(http.Dir("public"))
-	http.Handle("/", file)
-	http.ListenAndServe(":8080", nil)
+	e := echo.New()
+	e.Static("/", "public/index.html")
 
+	e.Logger.Fatal(e.Start("127.0.0.1:1234"))
 }
