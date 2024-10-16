@@ -9,7 +9,7 @@ app_hash=config.app_hash
 
 app=Client("my_account",api_id=app_id,api_hash=app_hash)
 
-@app.on_message(filters.chat("freelance_ethio"))  # Filter messages from a specific channel
+@app.on_message(filters.chat("YabseraBo"))  # Filter messages from a specific channel
 def message_listener(client, message):
     # Check if the message contains the target word
     try:
