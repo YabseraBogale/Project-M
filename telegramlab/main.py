@@ -1,13 +1,13 @@
 from telegram.ext import Updater, MessageHandler, Filters
 from telegram import ParseMode
-
+import config
 # Your bot token from BotFather
-BOT_TOKEN = 'YOUR_BOT_TOKEN'
-TARGET_WORD = 'your_word'  # The word to listen for
+BOT_TOKEN = config.Config.TelegramApi()
+TARGET_WORD = 'Job Title'  # The word to listen for
 RESPONSE = 'This is the response message'  # The response message
 
 # Specify the channel ID or username (e.g., -1001234567890 or @channelusername)
-CHANNEL_ID = '@your_channel_username'  # Or use the numeric ID like -1001234567890
+CHANNEL_ID = 'freelance_ethio'  # Or use the numeric ID like -1001234567890
 
 # Function to handle new messages
 def message_handler(update, context):
@@ -18,8 +18,7 @@ def message_handler(update, context):
         # Check if the target word is in the message
         if TARGET_WORD.lower() in message_text.lower():
             # Respond to the message
-            update.message.reply_text(RESPONSE, parse_mode=ParseMode.HTML)
-
+            print("found message\n",message_text.lower())
 def main():
     # Create Updater and pass the bot's token
     updater = Updater(token=BOT_TOKEN, use_context=True)
