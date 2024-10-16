@@ -1,3 +1,4 @@
 env/
 config.py
+my_account.session
 __pycache__
