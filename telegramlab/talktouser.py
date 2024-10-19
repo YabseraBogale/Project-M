@@ -1,9 +1,9 @@
 from pyrogram import Client
-
+from config import Config
 # API ID and Hash from my.telegram.org
-api_id = "YOUR_API_ID"
-api_hash = "YOUR_API_HASH"
-phone_number = "YOUR_PHONE_NUMBER"
+api_id = Config().app_id
+api_hash = Config().app_hash
+phone_number = "+251920201161"
 
 # Create the Pyrogram Client
 app = Client("my_account", api_id=api_id, api_hash=api_hash)
