@@ -9,7 +9,7 @@ import (
 func main() {
 	smtphost := "smtp.gmail.com"
 	smtpport := "587"
-	email := "yabserapython@gmail.com"
+	email := "cheretaaddis@gmail.com"
 	to := []string{"yabserapython@gmail.com"}
 	app_id := os.Getenv("app_id")
 	msg := "subject: This is to test golang\n\nthis the body to the message"
