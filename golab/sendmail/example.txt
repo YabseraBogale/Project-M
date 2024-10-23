@@ -1,3 +1,4 @@
+// Going to read this article it looks good https://medium.com/geekculture/automating-emails-with-go-587a87b1f298
 package main
 
 import (
