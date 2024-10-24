@@ -12,7 +12,7 @@ func GetHtml() (string, error) {
 	if err != nil {
 		return "", err
 	}
-	f := []string{}
+	f := []string{"Hello World"}
 	buf := new(bytes.Buffer)
 	if err = temp.Execute(buf, f); err != nil {
 		return "", err
