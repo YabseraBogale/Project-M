@@ -5,8 +5,6 @@ import (
 	"fmt"
 	"html/template"
 	"log"
-	"net/smtp"
-	"os"
 )
 
 func GetHtml() (string, error) {
