@@ -33,8 +33,8 @@ func main() {
 	to := []string{"yabserapython@gmail.com"}
 
 	// SMTP server configuration
-	smtpHost := "smtp.example.com" // Example: smtp.gmail.com
-	smtpPort := "587"              // For SSL: 465, for STARTTLS: 587
+	smtpHost := "smtp.gmail.com" // Example: smtp.gmail.com
+	smtpPort := "587"            // For SSL: 465, for STARTTLS: 587
 
 	// Message
 	subject := "Subject: Test HTML Email\n"
