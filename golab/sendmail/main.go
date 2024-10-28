@@ -2,10 +2,9 @@ package main
 
 import (
 	"bytes"
-	"fmt"
+	"gopkg.in/mail.v2"
 	"html/template"
 	"log"
-	"net/smtp"
 )
 
 func GetHtml() (string, error) {
@@ -28,30 +27,30 @@ func main() {
 	if err != nil {
 		log.Fatalln(err)
 	}
-	from := "cheretaaddis@gmail.com"
-	password := "zgzd xtlt emlc tzfb"
-	to := []string{"yabserapython@gmail.com"}
+	from := "yabsera@frielvh.com"
+	password := "YSFYy&h{{_Fn"
+	to := "yabserapython@gmail.com"
 
 	// SMTP server configuration
-	smtpHost := "smtp.gmail.com" // Example: smtp.gmail.com
-	smtpPort := "587"            // For SSL: 465, for STARTTLS: 587
+	smtpHost := "mail.frielvh.com" // Example: smtp.gmail.com
+	smtpPort := 587                // For SSL: 465, for STARTTLS: 587
+	m := mail.NewMessage()
 
-	// Message
-	subject := "Subject: Test HTML Email\n"
-	mime := "MIME-version: 1.0;\nContent-Type: text/html; charset=\"UTF-8\";\n\n"
+	// Set the sender and recipient addresses
+	m.SetHeader("From", from)
+	m.SetHeader("To", to)
+	m.SetHeader("Subject", "Test HTML Email")
 
-	// Combine headers and body
-	message := []byte(subject + mime + str)
+	// Set the email body as HTML
+	m.SetBody("text/html", str)
 
-	// Authentication
-	auth := smtp.PlainAuth("", from, password, smtpHost)
+	// SMTP server configuration
+	d := mail.NewDialer(smtpHost, smtpPort, from, password)
 
-	// Send Email
-	err = smtp.SendMail(smtpHost+":"+smtpPort, auth, from, to, message)
-	if err != nil {
-		fmt.Println("Error sending email:", err)
-		return
+	// Send the email
+	if err := d.DialAndSend(m); err != nil {
+		log.Fatal(err)
 	}
-	fmt.Println("Email sent successfully!")
-	fmt.Println(str)
+
+	log.Println("Email sent successfully!")
 }
