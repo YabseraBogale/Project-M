@@ -32,7 +32,7 @@ func main() {
 	to := "yabserapython@gmail.com"
 
 	// SMTP server configuration
-	smtpHost := "stmp.gmail.com" // Example: smtp.gmail.com
+	smtpHost := "smtp.gmail.com" // Example: smtp.gmail.com
 	smtpPort := 587                // For SSL: 465, for STARTTLS: 587
 	m := mail.NewMessage()
 
