@@ -27,12 +27,12 @@ func main() {
 	if err != nil {
 		log.Fatalln(err)
 	}
-	from := "yabsera@frielvh.com"
-	password := "YSFYy&h{{_Fn"
+	from := "cheretaaddis@gmail.com"
+	password := "zgzd xtlt emlc tzfb"
 	to := "yabserapython@gmail.com"
 
 	// SMTP server configuration
-	smtpHost := "mail.frielvh.com" // Example: smtp.gmail.com
+	smtpHost := "stmp.gmail.com" // Example: smtp.gmail.com
 	smtpPort := 587                // For SSL: 465, for STARTTLS: 587
 	m := mail.NewMessage()
 
