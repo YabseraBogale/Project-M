@@ -2,9 +2,10 @@ package main
 
 import (
 	"bytes"
-	"gopkg.in/mail.v2"
 	"html/template"
 	"log"
+
+	"gopkg.in/mail.v2"
 )
 
 func GetHtml() (string, error) {
@@ -33,7 +34,7 @@ func main() {
 
 	// SMTP server configuration
 	smtpHost := "smtp.gmail.com" // Example: smtp.gmail.com
-	smtpPort := 587                // For SSL: 465, for STARTTLS: 587
+	smtpPort := 587              // For SSL: 465, for STARTTLS: 587
 	m := mail.NewMessage()
 
 	// Set the sender and recipient addresses
