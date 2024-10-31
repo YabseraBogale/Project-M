@@ -31,12 +31,14 @@ func main() {
 	var user Data
 	for scanner.Scan() {
 		line := scanner.Text()
-		if slower%100 == 0 {
-			err := json.NewDecoder(strings.NewReader(line)).Decode(&user)
+		err := json.NewDecoder(strings.NewReader(line)).Decode(&user)
 			if err != nil {
 				log.Println(err)
 			}
 			fmt.Println(user)
+		slower+=1
+		if slower%100 == 0 {
+
 			time.Sleep(30 * time.Second)
 		}
 		if slower == 2 {
