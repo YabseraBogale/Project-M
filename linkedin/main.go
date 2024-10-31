@@ -11,8 +11,15 @@ func main() {
 	if err != nil {
 		log.Println(err)
 	}
+	var input string
+	for _, j := range file {
 
-	fmt.Println(file[0])
+		fmt.Println(file[j])
+		fmt.Scanln(&input)
+		if input == "q" {
+			break
+		}
+	}
 	// scanner := bufio.NewScanner(bytes.NewBuffer(file))
 	// count := 0
 	// slower := 1
