@@ -3,12 +3,21 @@ package main
 import (
 	"bufio"
 	"bytes"
+	"encoding/json"
 	"fmt"
 	"log"
 	"os"
 	"strings"
 	"time"
 )
+
+type Data struct {
+	FirstName     string `json:"FirstName"`
+	LastName      string `json:"LastName"`
+	EmailAddress  string `json:"EmailAddress"`
+	DecisionMaker string `json:"DecisionMaker"`
+	Country       string `json:"Country"`
+}
 
 func main() {
 	file, err := os.ReadFile("data.json")
@@ -19,16 +28,15 @@ func main() {
 	scanner := bufio.NewScanner(bytes.NewBuffer(file))
 	count := 0
 	slower := 1
+	var user Data
 	for scanner.Scan() {
 		line := scanner.Text()
-		slower += 1
-		fmt.Println(line)
-		if strings.Contains(line, "EmailAddress") {
-			count += 1
-			fmt.Println(line)
-		}
 		if slower%100 == 0 {
-			println("At line", slower)
+			err := json.NewDecoder(strings.NewReader(line)).Decode(&user)
+			if err != nil {
+				log.Println(err)
+			}
+			fmt.Println(user)
 			time.Sleep(30 * time.Second)
 		}
 		if slower == 2 {
