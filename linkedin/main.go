@@ -58,7 +58,7 @@ func main() {
 		slower += 1
 		if slower%100 == 0 {
 			fmt.Println(slower)
-			time.Sleep(30 * time.Second)
+			time.Sleep(2 * time.Second)
 		}
 
 	}
