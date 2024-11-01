@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"bytes"
+	"database/sql"
 	"encoding/json"
 	"fmt"
 	"log"
@@ -20,7 +21,14 @@ type Data struct {
 	HQCompanyName string `json:"HQCompanyName"|nil`
 }
 
+const filename string = "database.db"
+
 func main() {
+	db, err := sql.Open("sqlite3", filename)
+	if err != nil {
+		log.Println(err)
+	}
+
 	file, err := os.ReadFile("data.json")
 	if err != nil {
 		log.Println(err)
@@ -36,15 +44,21 @@ func main() {
 			log.Println(err)
 		}
 		if user.EmailAddress != "" && user.DecisionMaker == true {
-			fmt.Println("At line", slower, user)
+			statment := `Insert into UserEmail(FirstName,LastName,Country,Email,HQCompanyName) values(?,?,?,?,?)`
+			state, err := db.Prepare(statment)
+			if err != nil {
+				log.Println(err)
+			}
+			_, err = state.Exec(user.FirstName, user.LastName, user.Country, user.EmailAddress, user.HQCompanyName)
+			if err != nil {
+				log.Println(err)
+			}
+
 		}
 		slower += 1
 		if slower%100 == 0 {
-
+			fmt.Println(slower)
 			time.Sleep(30 * time.Second)
-		}
-		if slower == 10000 {
-			break
 		}
 
 	}
