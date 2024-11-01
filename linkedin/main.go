@@ -17,6 +17,7 @@ type Data struct {
 	EmailAddress  string `json:"EmailAddress"|nil`
 	DecisionMaker bool   `json:"DecisionMaker"|nil`
 	Country       string `json:"Country"|nil`
+	HQCompanyName string `json:"HQCompanyName"|nil`
 }
 
 func main() {
