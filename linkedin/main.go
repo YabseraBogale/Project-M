@@ -15,7 +15,7 @@ type Data struct {
 	FirstName     string `json:"FirstName"|nil`
 	LastName      string `json:"LastName"|nil`
 	EmailAddress  string `json:"EmailAddress"|nil`
-	DecisionMaker bool `json:"DecisionMaker"|nil`
+	DecisionMaker bool   `json:"DecisionMaker"|nil`
 	Country       string `json:"Country"|nil`
 }
 
@@ -35,13 +35,15 @@ func main() {
 		if err != nil {
 			log.Println(err)
 		}
-		fmt.Println(user)
+		if user.EmailAddress != "" {
+			fmt.Println(user)
+		}
 		slower += 1
 		if slower%100 == 0 {
 
 			time.Sleep(30 * time.Second)
 		}
-		if slower == 2 {
+		if slower == 1000 {
 			break
 		}
 
