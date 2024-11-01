@@ -26,7 +26,6 @@ func main() {
 	}
 
 	scanner := bufio.NewScanner(bytes.NewBuffer(file))
-	count := 0
 	slower := 1
 	var user Data
 	for scanner.Scan() {
@@ -35,18 +34,18 @@ func main() {
 		if err != nil {
 			log.Println(err)
 		}
-		if user.EmailAddress != "" {
-			fmt.Println(user)
+		if user.EmailAddress != "" && user.DecisionMaker == true {
+			fmt.Println("At line", slower, user)
 		}
 		slower += 1
 		if slower%100 == 0 {
 
 			time.Sleep(30 * time.Second)
 		}
-		if slower == 1000 {
+		if slower == 10000 {
 			break
 		}
 
 	}
-	println("found", count, "email")
+
 }
