@@ -10,6 +10,8 @@ import (
 	"os"
 	"strings"
 	"time"
+
+	_ "github.com/mattn/go-sqlite3"
 )
 
 type Data struct {
@@ -53,11 +55,11 @@ func main() {
 			if err != nil {
 				log.Println(err)
 			}
-
+			fmt.Println("Sucessfully Inserted line at .... ", slower)
 		}
 		slower += 1
 		if slower%100 == 0 {
-			fmt.Println(slower)
+
 			time.Sleep(2 * time.Second)
 		}
 
