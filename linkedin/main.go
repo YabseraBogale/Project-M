@@ -17,7 +17,7 @@ import (
 type Data struct {
 	FirstName     string `json:"FirstName"|nil`
 	LastName      string `json:"LastName"|nil`
-	EmailAddress  string `json:"Email"|nil`
+	EmailAddress  string `json:"EmailAddress"|nil`
 	DecisionMaker bool   `json:"DecisionMaker"|nil`
 	Country       string `json:"Country"|nil`
 	HQCompanyName string `json:"HQCompanyName"|nil`
