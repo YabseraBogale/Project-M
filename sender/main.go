@@ -30,5 +30,7 @@ func main() {
 		}
 		userdata[EmailAddres] = []string{Firstname, Lastname, Country}
 	}
+
 	fmt.Println(userdata)
+	fmt.Println("count of the map", len(userdata))
 }
