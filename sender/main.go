@@ -35,5 +35,5 @@ func main() {
 	for j, i := range userdata {
 		fmt.Println(j, i)
 	}
-
+	fmt.Println(len(userdata))
 }
