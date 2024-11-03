@@ -15,7 +15,7 @@ func main() {
 		log.Println("err with open", err)
 	}
 	defer db.Close()
-	state, err := db.Query(`select distinct Firstname,Lastname,Email,Country from useremail`)
+	state, err := db.Query(`select distinct Firstname,Lastname,Email,Country,HQCompanyName from useremail`)
 	if err != nil {
 		log.Println("err with query", err)
 	}
@@ -24,13 +24,16 @@ func main() {
 		var Lastname string
 		var EmailAddres string
 		var Country string
-		err := state.Scan(&Firstname, &Lastname, &EmailAddres, &Country)
+		var HQCompanyName string
+		err := state.Scan(&Firstname, &Lastname, &EmailAddres, &Country, &HQCompanyName)
 		if err != nil {
 			log.Println("err with scan", err)
 		}
-		userdata[EmailAddres] = []string{Firstname, Lastname, Country}
+		userdata[EmailAddres] = []string{Firstname, Lastname, Country, HQCompanyName}
 	}
 
-	fmt.Println(userdata)
-	fmt.Println("count of the map", len(userdata))
+	for j, i := range userdata {
+		fmt.Println(j, i)
+	}
+
 }
