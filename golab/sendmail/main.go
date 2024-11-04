@@ -36,7 +36,6 @@ func main() {
 	smtpHost := "smtp.gmail.com" // Example: smtp.gmail.com
 	smtpPort := 587              // For SSL: 465, for STARTTLS: 587
 	m := mail.NewMessage()
-
 	// Set the sender and recipient addresses
 	m.SetHeader("From", from)
 	m.SetHeader("To", to)
