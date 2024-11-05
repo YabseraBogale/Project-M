@@ -39,7 +39,7 @@ func main() {
 	// Set the sender and recipient addresses
 	m.SetHeader("From", from)
 	m.SetHeader("To", to)
-	m.SetHeader("Subject", "Test HTML Email")
+	m.SetHeader("Subject", "Software Developer Application- Yabsera Bogale")
 
 	// Set the email body as HTML
 	m.SetBody("text/html", str)
