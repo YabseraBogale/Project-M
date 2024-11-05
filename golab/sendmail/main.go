@@ -24,8 +24,31 @@ func main() {
 		log.Println("err with open", err)
 	}
 	defer db.Close()
+	row, err := db.Query(`Select Email,Sent from userdata where Sent='not_sent';`)
+	if err != nil {
+		log.Println("Select Email,Sent from userdata where Sent= with error", err)
+	}
+	for row.Next() {
+		var Email string
+		var Sent string
+		row.Scan(&Email, &Sent)
 
-	EmailSender("yabserapython@gmail.com")
+		sent, err := EmailSender(Email)
+		if err != nil {
+			log.Println("Email not sent for", Email, "with error", err)
+		} else if sent {
+			statment, err := db.Prepare(`update userdata set Sent=(?) where Email=(?);`)
+			if err != nil {
+				log.Println("Email not sent for", Email, "with error", err)
+			}
+			Sent = "sent"
+			_, err = statment.Exec(Sent, Email)
+			if err != nil {
+				log.Println("Email not sent for", Email, "with error", err)
+			}
+		}
+	}
+
 }
 
 func EmailSender(to string) (bool, error) {
