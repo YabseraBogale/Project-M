@@ -33,13 +33,13 @@ func main() {
 		if err != nil {
 			log.Println("err with scan", err)
 		}
-		if "Indonesia" == Country {
+		if Country == "Indonesia" {
 			Indonesia += 1
-		} else if "Germany" == Country {
+		} else if Country == "Germany" {
 			Germany += 1
-		} else if "Saudi" == Country {
+		} else if Country == "Saudi" {
 			Saudi += 1
-		} else if "Angola" == Country {
+		} else if Country == "Angola" {
 			Angola += 1
 		} else {
 			Unknown += 1
