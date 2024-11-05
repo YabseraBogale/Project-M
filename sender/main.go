@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	userdata := map[string][]string{}
+
 	db, err := sql.Open("sqlite3", "gold.db")
 	if err != nil {
 		log.Println("err with open", err)
