@@ -3,6 +3,7 @@ package main
 import (
 	"bytes"
 	"database/sql"
+	"fmt"
 	"html/template"
 	"log"
 	"os"
@@ -42,10 +43,11 @@ func main() {
 				log.Println("Email not sent for", Email, "with error", err)
 			}
 			Sent = "sent"
-			_, err = statment.Exec(Sent, Email)
+			result, err := statment.Exec(Sent, Email)
 			if err != nil {
 				log.Println("Email not sent for", Email, "with error", err)
 			}
+			fmt.Println("Sent to", Email, "with result", result)
 		}
 	}
 
