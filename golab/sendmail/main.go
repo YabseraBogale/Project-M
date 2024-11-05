@@ -2,10 +2,12 @@ package main
 
 import (
 	"bytes"
+	"database/sql"
 	"html/template"
 	"log"
 	"os"
 
+	_ "github.com/mattn/go-sqlite3"
 	"gopkg.in/mail.v2"
 )
 
@@ -17,6 +19,11 @@ const smtpPort = 587
 var password string = os.Getenv("password")
 
 func main() {
+	db, err := sql.Open("sqlite3", "gold.db")
+	if err != nil {
+		log.Println("err with open", err)
+	}
+	defer db.Close()
 
 	EmailSender("yabserapython@gmail.com")
 }
