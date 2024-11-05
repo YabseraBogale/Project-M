@@ -28,6 +28,7 @@ func main() {
 
 	for state.Next() {
 		var Country string
+		count += 1
 		err := state.Scan(&Country)
 		if err != nil {
 			log.Println("err with scan", err)
@@ -55,6 +56,7 @@ func main() {
 	ExpectedPeopleToSeeMax := count * 25 / 100
 	ExpectedPeopleToSeeCallMin := ExpectedPeopleToSeeMin * 17 / 100
 	ExpectedPeopleToSeeCallMax := ExpectedPeopleToSeeMin * 25 / 100
+	DataSent := 10 * count
 	fmt.Println("All Assumations being all the email works")
 	fmt.Println("Indonesia:", Indonesia, "Percentage:", indonesia)
 	fmt.Println("Germany:", Germany, "Percentage:", germany)
@@ -65,5 +67,6 @@ func main() {
 	fmt.Println("Expected 25% number of people to see the email", ExpectedPeopleToSeeMax)
 	fmt.Println("Expected 17% number of people to call", ExpectedPeopleToSeeCallMin)
 	fmt.Println("Expected 25% number of people to call", ExpectedPeopleToSeeCallMax)
+	fmt.Println("Size of data sent over email for", count, "is", DataSent, "kb")
 
 }
