@@ -59,7 +59,7 @@ func main() {
 	fmt.Println("Indonesia:", Indonesia, "Percentage:", indonesia)
 	fmt.Println("Germany:", Germany, "Percentage:", germany)
 	fmt.Println("Saudi:", Saudi, "Percentage:", saudi)
-	fmt.Println("Saudi:", Angola, "Percentage:", angola)
+	fmt.Println("Angola:", Angola, "Percentage:", angola)
 	fmt.Println("Unknown:", Unknown, "Percentage:", unknown)
 	fmt.Println("Expected 17% number of people to see the email", ExpectedPeopleToSeeMin)
 	fmt.Println("Expected 25% number of people to see the email", ExpectedPeopleToSeeMax)
