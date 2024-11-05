@@ -4,37 +4,30 @@ import (
 	"bytes"
 	"html/template"
 	"log"
+	"os"
 
 	"gopkg.in/mail.v2"
 )
 
-func GetHtml() (string, error) {
-	temp, err := template.ParseFiles("index.html")
-	if err != nil {
-		log.Println(err)
-		return "", err
-	}
-	f := []string{"Hello World"}
-	buf := new(bytes.Buffer)
-	if err = temp.Execute(buf, f); err != nil {
-		return "", err
-	}
-	return buf.String(), nil
-}
+const from string = "cheretaaddis@gmail.com"
+
+const smtpHost = "smtp.gmail.com" // Example: smtp.gmail.com
+const smtpPort = 587
+
+var password string = os.Getenv("password")
 
 func main() {
 
+	EmailSender("yabserapython@gmail.com")
+}
+
+func EmailSender(to string) (bool, error) {
 	str, err := GetHtml()
 	if err != nil {
-		log.Fatalln(err)
+		return false, err
 	}
-	from := "cheretaaddis@gmail.com"
-	password := "zgzd xtlt emlc tzfb"
-	to := "yabserapython@gmail.com"
-
 	// SMTP server configuration
-	smtpHost := "smtp.gmail.com" // Example: smtp.gmail.com
-	smtpPort := 587              // For SSL: 465, for STARTTLS: 587
+	// For SSL: 465, for STARTTLS: 587
 	m := mail.NewMessage()
 	// Set the sender and recipient addresses
 	m.SetHeader("From", from)
@@ -49,8 +42,21 @@ func main() {
 
 	// Send the email
 	if err := d.DialAndSend(m); err != nil {
-		log.Fatal(err)
+		return false, err
 	}
+	return true, nil
+}
 
-	log.Println("Email sent successfully!")
+func GetHtml() (string, error) {
+	temp, err := template.ParseFiles("index.html")
+	if err != nil {
+		log.Println(err)
+		return "", err
+	}
+	f := []string{"Hello World"}
+	buf := new(bytes.Buffer)
+	if err = temp.Execute(buf, f); err != nil {
+		return "", err
+	}
+	return buf.String(), nil
 }
