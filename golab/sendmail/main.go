@@ -28,13 +28,19 @@ func main() {
 	log.SetOutput(file)
 	db, err := sql.Open("sqlite3", "gold.db")
 	if err != nil {
-		log.Println("err with open", err)
+		log.Println(err)
 	}
 	defer db.Close()
+	// 	select * from userdata WHERE Country='Germany' and Sent='not_sent' LIMIT 50;
+	// 	select * from userdata WHERE Country='Saudi' and Sent='not_sent' LIMIT 50;
+	// 	select * from userdata WHERE Country='USA' and Sent='not_sent' LIMIT 50;
+	// 	select * from userdata WHERE Country='Indonesia' and Sent='not_sent' LIMIT 50;
+	// 	select * from userdata WHERE Country='Angola' and Sent='not_sent' LIMIT 50;
 	row, err := db.Query(`Select Email,Sent from userdata where Sent='not_sent';`)
 	if err != nil {
-		log.Println("Select Email,Sent from userdata where Sent= with error", err)
+		log.Println(err)
 	}
+
 	for row.Next() {
 		numberOfSent -= 1
 		if numberOfSent == 0 {
@@ -47,16 +53,16 @@ func main() {
 
 		sent, err := EmailSender(Email)
 		if err != nil {
-			log.Println("Email not sent for", Email, "with error", err)
+			log.Println(err)
 		} else if sent {
 			statment, err := db.Prepare(`update userdata set Sent=(?) where Email=(?);`)
 			if err != nil {
-				log.Println("Email not sent for", Email, "with error", err)
+				log.Println(err)
 			}
 			Sent = "sent"
 			result, err := statment.Exec(Sent, Email)
 			if err != nil {
-				log.Println("Email not sent for", Email, "with error", err)
+				log.Println(err)
 			}
 			fmt.Println("Sent to", Email, "with result", result)
 		}
