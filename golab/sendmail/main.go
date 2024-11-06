@@ -17,9 +17,15 @@ const from string = "cheretaaddis@gmail.com"
 const smtpHost = "smtp.gmail.com" // Example: smtp.gmail.com
 const smtpPort = 587
 
+var numberOfSent int = 400
 var password string = os.Getenv("password")
 
 func main() {
+	file, err := os.OpenFile("app.log", os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
+	if err != nil {
+		log.Fatal(err)
+	}
+	log.SetOutput(file)
 	db, err := sql.Open("sqlite3", "gold.db")
 	if err != nil {
 		log.Println("err with open", err)
@@ -30,6 +36,11 @@ func main() {
 		log.Println("Select Email,Sent from userdata where Sent= with error", err)
 	}
 	for row.Next() {
+		numberOfSent -= 1
+		if numberOfSent == 0 {
+			break
+
+		}
 		var Email string
 		var Sent string
 		row.Scan(&Email, &Sent)
