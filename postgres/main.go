@@ -7,6 +7,7 @@ import (
 	"os"
 	"time"
 
+	"github.com/lib/pq"
 	_ "github.com/lib/pq"
 	_ "github.com/mattn/go-sqlite3"
 )
@@ -32,7 +33,7 @@ func main() {
 		log.Println(err)
 	}
 	defer sqlite.Close()
-	postgres, err := sql.Open("postgres", fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", host, port, user, password, dbname))
+	postgres, err := pq.Open(fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", host, port, user, password, dbname))
 	if err != nil {
 		log.Println(err)
 	}
@@ -43,7 +44,7 @@ func main() {
 		log.Println(err)
 	}
 	defer row.Close()
-	Insert, err := postgres.Prepare(`Insert into UserData(Email, Firstname, Lastname, Country, HQCompanyName, Sent) values(?,?,?,?,?,?)`)
+	Insert, err := postgres.Prepare(`Insert into UserData(Email, Firstname, Lastname, Country, HQCompanyName, Sent) values(?,?,?,?,?,?);`)
 	if err != nil {
 		log.Println(err)
 	}
@@ -60,7 +61,14 @@ func main() {
 		if err != nil {
 			log.Println(err)
 		}
-		_, err = Insert.Exec(Email, Firstname, Lastname, Country, HQCompanyName, Sent)
+		_, err = Insert.Exec(
+			Email,
+			Firstname,
+			Lastname,
+			Country,
+			HQCompanyName,
+			Sent,
+		)
 		if err != nil {
 			log.Println(err)
 		}
