@@ -1,0 +1,48 @@
+2024/11/06 18:08:27 sql: unknown driver "sqlite3" (forgotten import?)
+2024/11/06 18:12:00 Message number out of range.
+2024/11/06 18:22:28 dial tcp 142.251.31.109:995: i/o timeout
+2024/11/06 18:23:25 dial tcp: lookup pop.gmail.com: i/o timeout
+2024/11/06 18:24:02 dial tcp 142.251.31.108:995: i/o timeout
+2024/11/06 18:24:34 dial tcp: lookup pop.gmail.com: i/o timeout
+2024/11/06 18:25:57 connection dial tcp: lookup pop.gmail.com: i/o timeout
+2024/11/06 18:28:34 gomail: could not send email 1: read tcp 192.168.1.6:36120->108.177.127.108:587: i/o timeout
+2024/11/06 18:34:00 connection dial tcp: lookup pop.gmail.com: i/o timeout
+2024/11/06 18:54:29 read tcp 192.168.1.6:52534->173.194.69.109:587: i/o timeout
+2024/11/06 18:54:57 gomail: could not send email 1: read tcp 192.168.1.6:60954->173.194.69.109:587: i/o timeout
+2024/11/06 18:55:14 read tcp 192.168.1.6:38594->173.194.69.109:587: i/o timeout
+2024/11/06 18:55:30 read tcp 192.168.1.6:56418->173.194.69.109:587: i/o timeout
+2024/11/06 18:57:24 connection dial tcp: lookup pop.gmail.com: i/o timeout
+2024/11/06 18:57:52 connection dial tcp 173.194.79.108:995: i/o timeout
+2024/11/06 19:23:58 connection dial tcp: lookup pop.gmail.com: i/o timeout
+2024/11/06 19:24:20 connection dial tcp: lookup pop.gmail.com: i/o timeout
+2024/11/06 19:25:00 dial tcp: lookup smtp.gmail.com: i/o timeout
+2024/11/06 19:25:34 gomail: could not send email 1: read tcp 192.168.1.6:34642->142.250.145.109:587: i/o timeout
+2024/11/06 19:25:54 gomail: could not send email 1: read tcp 192.168.1.6:37262->108.177.119.109:587: i/o timeout
+2024/11/06 19:31:10 connection dial tcp: lookup pop.gmail.com: i/o timeout
+2024/11/06 19:35:13 malformed command cy23mb16413746edb
+2024/11/06 19:35:28 535 5.7.8 Username and Password not accepted. For more information, go to
+5.7.8  https://support.google.com/mail/?p=BadCredentials 4fb4d7f45d1cf-5cee6a9a3b5sm2941070a12.16 - gsmtp
+2024/11/06 19:35:43 read tcp 192.168.1.6:47316->108.177.119.108:587: i/o timeout
+2024/11/06 19:35:56 535 5.7.8 Username and Password not accepted. For more information, go to
+5.7.8  https://support.google.com/mail/?p=BadCredentials 4fb4d7f45d1cf-5cee6ab3806sm2936623a12.33 - gsmtp
+2024/11/06 19:36:08 read tcp 192.168.1.6:50776->108.177.119.108:587: i/o timeout
+2024/11/06 19:36:51 malformed command x4mb15837616edd
+2024/11/06 19:37:05 535 5.7.8 Username and Password not accepted. For more information, go to
+5.7.8  https://support.google.com/mail/?p=BadCredentials a640c23a62f3a-a9eb17d7318sm298843466b.131 - gsmtp
+2024/11/06 19:37:10 535 5.7.8 Username and Password not accepted. For more information, go to
+5.7.8  https://support.google.com/mail/?p=BadCredentials a640c23a62f3a-a9eb16d5478sm299003066b.45 - gsmtp
+2024/11/06 19:37:12 535 5.7.8 Username and Password not accepted. For more information, go to
+5.7.8  https://support.google.com/mail/?p=BadCredentials a640c23a62f3a-a9eb16a324fsm309708266b.23 - gsmtp
+2024/11/06 19:37:15 535 5.7.8 Username and Password not accepted. For more information, go to
+5.7.8  https://support.google.com/mail/?p=BadCredentials a640c23a62f3a-a9eb17cf8a7sm298744166b.97 - gsmtp
+2024/11/06 19:45:13 malformed command z6mb16141751edb
+2024/11/06 19:45:30 535 5.7.8 Username and Password not accepted. For more information, go to
+5.7.8  https://support.google.com/mail/?p=BadCredentials 4fb4d7f45d1cf-5cee6b1050esm2941412a12.86 - gsmtp
+2024/11/06 19:45:44 read tcp 192.168.1.6:33252->108.177.119.109:587: i/o timeout
+2024/11/06 19:46:13 gomail: could not send email 1: write tcp 192.168.1.6:45762->108.177.119.109:587: i/o timeout
+2024/11/06 19:46:26 read tcp 192.168.1.6:55906->108.177.119.109:587: i/o timeout
+2024/11/07 09:07:46 sql: unknown driver "sqlite3" (forgotten import?)
+2024/11/07 09:11:00 sql: unknown driver "sqlite3" (forgotten import?)
+2024/11/07 09:12:25 sql: unknown driver "sqlite3" (forgotten import?)
+2024/11/07 09:13:45 Not logged in
+2024/11/07 09:14:41 Not logged in
