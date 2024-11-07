@@ -56,7 +56,7 @@ func main() {
 		var Country string
 		var HQCompanyName string
 		var Sent string
-		err := row.Scan(&Email, &Firstname, &Lastname, &Country, HQCompanyName, Sent)
+		err := row.Scan(&Email, &Firstname, &Lastname, &Country, &HQCompanyName, &Sent)
 		if err != nil {
 			log.Println(err)
 		}
