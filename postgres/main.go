@@ -37,4 +37,23 @@ func main() {
 	}
 	defer postgres.Close()
 
+	row, err := sqlite.Query(`Select * from UserData limit 10;`)
+	if err != nil {
+		log.Println(err)
+	}
+	defer row.Close()
+
+	for row.Next() {
+		var Email string
+		var Firstname string
+		var Lastname string
+		var Country string
+		var HQCompanyName string
+		var Sent string
+		err := row.Scan(&Email, &Firstname, &Lastname, &Country, HQCompanyName, Sent)
+		if err != nil {
+			log.Println(err)
+		}
+		fmt.Println(Email, Firstname, Lastname, Country, HQCompanyName, Sent)
+	}
 }
