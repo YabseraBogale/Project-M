@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"time"
 
 	_ "github.com/lib/pq"
 	_ "github.com/mattn/go-sqlite3"
@@ -37,13 +38,18 @@ func main() {
 	}
 	defer postgres.Close()
 
-	row, err := sqlite.Query(`Select * from UserData limit 10;`)
+	row, err := sqlite.Query(`Select * from UserData;`)
 	if err != nil {
 		log.Println(err)
 	}
 	defer row.Close()
-
+	Insert, err := postgres.Prepare(`Insert into UserData(Email, Firstname, Lastname, Country, HQCompanyName, Sent) values(?,?,?,?,?,?)`)
+	if err != nil {
+		log.Println(err)
+	}
+	slower := 0
 	for row.Next() {
+		slower += 1
 		var Email string
 		var Firstname string
 		var Lastname string
@@ -54,6 +60,13 @@ func main() {
 		if err != nil {
 			log.Println(err)
 		}
-		fmt.Println(Email, Firstname, Lastname, Country, HQCompanyName, Sent)
+		_, err = Insert.Exec(Email, Firstname, Lastname, Country, HQCompanyName, Sent)
+		if err != nil {
+			log.Println(err)
+		}
+		if slower%1000 == 0 {
+			fmt.Println("At line row ... ", slower)
+			time.Sleep(2 * time.Second)
+		}
 	}
 }
