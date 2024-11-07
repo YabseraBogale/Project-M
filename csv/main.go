@@ -1,25 +1,23 @@
 package main
 
 import (
-	"bytes"
-	"encoding/csv"
+	"database/sql"
 	"fmt"
 	"log"
-	"os"
+
+	_ "github.com/mattn/go-sqlite3"
 )
 
 func main() {
-	file, err := os.ReadFile("SC.csv")
+
+	db, err := sql.Open("sqlite3", "gold.db")
 	if err != nil {
-		log.Println("File Reading", err)
+		fmt.Println("Reading db", err)
 	}
 
-	read, err := csv.NewReader(bytes.NewReader(file)).ReadAll()
+	statment, err := db.Query(`Select * from UserData Where Country="USA";`)
 	if err != nil {
-		log.Println("csv parser", err)
-	}
-	for _, i := range read {
-		fmt.Println(i)
+		log.Println("Prepare statemnt", err)
 	}
 
 }
