@@ -64,7 +64,11 @@ func main() {
 			log.Println(err)
 		}
 
-		_, err = tx.Exec("Insert into UserData(Email, Firstname, Lastname, Country, HQCompanyName, Sent) values($1,$2,$3,$4,$5,$6)", Email, Firstname, Lastname, Country, HQCompanyName, Sent)
+		_, err = tx.Exec("Insert into public.UserData(Email, Firstname, Lastname, Country, HQCompanyName, Sent) values($1,$2,$3,$4,$5,$6)", Email, Firstname, Lastname, Country, HQCompanyName, Sent)
+		if err != nil {
+			log.Println(err)
+		}
+		err = tx.Commit()
 		if err != nil {
 			log.Println(err)
 		}
