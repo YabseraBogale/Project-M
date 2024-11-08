@@ -50,8 +50,9 @@ func main() {
 		log.Println(err)
 	}
 	slower := 0
-	tx := postgres.MustBegin()
+
 	for row.Next() {
+		tx := postgres.MustBegin()
 		slower += 1
 		var Email string
 		var Firstname string
@@ -60,19 +61,21 @@ func main() {
 		var HQCompanyName string
 		var Sent string
 		err := row.Scan(&Email, &Firstname, &Lastname, &Country, &HQCompanyName, &Sent)
+
 		if err != nil {
 			log.Println(err)
 		}
 
-		tx.MustExec("Insert into public.UserData(Email, Firstname, Lastname, Country, HQCompanyName, Sent) values($1,$2,$3,$4,$5,$6)", Email, Firstname, Lastname, Country, HQCompanyName, Sent)
+		tx.MustExec("Insert into public.UserData(Email, Firstname, Lastname, Country, HQCompanyName, Sent) values($1, $2, $3, $4, $5, $6)", Email, Firstname, Lastname, Country, HQCompanyName, Sent)
 
+		err = tx.Commit()
+		if err != nil {
+			log.Println(err)
+		}
 		if slower%1000 == 0 {
 			fmt.Println("At line row ... ", slower)
 			time.Sleep(2 * time.Second)
 		}
 	}
-	err = tx.Commit()
-	if err != nil {
-		log.Println(err)
-	}
+
 }
