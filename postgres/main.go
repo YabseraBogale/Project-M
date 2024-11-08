@@ -64,17 +64,15 @@ func main() {
 			log.Println(err)
 		}
 
-		_, err = tx.Exec("Insert into public.UserData(Email, Firstname, Lastname, Country, HQCompanyName, Sent) values($1,$2,$3,$4,$5,$6)", Email, Firstname, Lastname, Country, HQCompanyName, Sent)
-		if err != nil {
-			log.Println(err)
-		}
-		err = tx.Commit()
-		if err != nil {
-			log.Println(err)
-		}
+		tx.MustExec("Insert into public.UserData(Email, Firstname, Lastname, Country, HQCompanyName, Sent) values($1,$2,$3,$4,$5,$6)", Email, Firstname, Lastname, Country, HQCompanyName, Sent)
+
 		if slower%1000 == 0 {
 			fmt.Println("At line row ... ", slower)
 			time.Sleep(2 * time.Second)
 		}
+	}
+	err = tx.Commit()
+	if err != nil {
+		log.Println(err)
 	}
 }
