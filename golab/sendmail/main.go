@@ -8,9 +8,6 @@ import (
 	"log"
 	"os"
 
-	"github.com/emersion/go-imap"
-	"github.com/emersion/go-imap/client"
-	go_mail "github.com/emersion/go-message/mail"
 	_ "github.com/mattn/go-sqlite3"
 	"gopkg.in/mail.v2"
 )
@@ -30,18 +27,9 @@ func main() {
 	}
 	log.SetOutput(file)
 
-	imapClient, err := client.DialTLS("imap.gmail.com:993", nil)
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer imapClient.Logout()
 
-	if err := imapClient.Login(from, password); err != nil {
-		log.Println("Login failed:", err)
-	}
 
 	// If login is successful
-	fmt.Println("Logged in successfully!")
 
 	db, err := sql.Open("sqlite3", "gold.db")
 	if err != nil {
@@ -71,43 +59,11 @@ func main() {
 		} else if sent {
 			fmt.Println("Sent to...", Email)
 
-			mailbox, err := imapClient.Select("INBOX", false)
-			if err != nil {
-				log.Println(err)
-			}
-			if mailbox.Messages > 0 {
-				seqset := new(imap.SeqSet)
-				seqset.AddRange(mailbox.Messages, mailbox.Messages)
-				messages := make(chan *imap.Message, 1)
-				section := &imap.BodySectionName{}
-				err = imapClient.Fetch(seqset, []imap.FetchItem{section.FetchItem()}, messages)
-				if err != nil {
-					log.Println(err)
-				}
-				msg := <-messages
-				if msg == nil {
-					log.Println("Server didn't return message")
-				}
-				r := msg.GetBody(section)
-				if r == nil {
-					log.Println("Server didn't return message body")
-				}
-				mr, err := go_mail.CreateReader(r)
-				if err != nil {
-					log.Fatal(err)
-				}
-				header := mr.Header
-				from, err := header.AddressList("From")
-				if err == nil {
-					fmt.Println("From:", from)
-				}
-				subject, err := header.Subject()
-				if err == nil {
-					fmt.Println("Subject:", subject)
-				}
+
+
 			}
 		}
-	}
+
 }
 
 func EmailSender(to string) (bool, error) {
