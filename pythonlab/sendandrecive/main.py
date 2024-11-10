@@ -4,12 +4,12 @@ import email
 from email.header import decode_header
 
 # Account credentials
-username = "your_email@example.com"
+username = "cheretaaddis@gmail.com"
 password =  os.getenv("password")
 
 # Connect to the server
 # For Gmail, use "imap.gmail.com"
-imap_server = "imap.example.com"
+imap_server = "imap.gmail.com"
 mail = imaplib.IMAP4_SSL(imap_server)
 
 # Log in
