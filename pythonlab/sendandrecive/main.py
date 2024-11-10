@@ -1,34 +1,63 @@
-from pprint import pprint
+import os
 import imaplib
 import email
-import os
+from email.header import decode_header
 
-Email="cheretaaddis@gmail.com"
-password=os.getenv("password")
-server="imap.gmail.com"
+# Account credentials
+username = "your_email@example.com"
+password =  os.getenv("password")
 
-mail=imaplib.IMAP4_SSL(server,993)
+# Connect to the server
+# For Gmail, use "imap.gmail.com"
+imap_server = "imap.example.com"
+mail = imaplib.IMAP4_SSL(imap_server)
 
+# Log in
+mail.login(username, password)
 
-result=mail.login(Email,password)
-
-
+# Select the mailbox you want to use ('inbox' in this case)
 mail.select("inbox")
-status,data=mail.search(None,"ALL")
-mail_ids = []
-for block in data:
-    mail_ids+=block.split()
 
+# Search for all emails in the inbox
+status, messages = mail.search(None, "ALL")
 
-for i in mail_ids:
-    try:    
-        status, data = mail.fetch(i, '(RFC822)')
-        for response_part in data:
-            if isinstance(response_part, tuple):
-                message = email.message_from_bytes(response_part[1])
-                mail_from = message['from']
-                mail_subject = message['subject']
-                if mail_subject.find("Failure")>=1 or mail_subject.find("Delay")>=1:
-                    print(message['In-Reply-To'].replace("<","").replace(">","").split("."))
-    except Exception as e:
-        print(str(e))
+# Get the list of email IDs
+email_ids = messages[0].split()
+
+# Fetch the latest email by ID
+latest_email_id = email_ids[-1]
+
+# Fetch the email by ID
+status, msg_data = mail.fetch(latest_email_id, "(RFC822)")
+
+# Parse the raw email content
+for response_part in msg_data:
+    if isinstance(response_part, tuple):
+        msg = email.message_from_bytes(response_part[1])
+        # Decode email sender, subject, and date
+        subject, encoding = decode_header(msg["Subject"])[0]
+        if isinstance(subject, bytes):
+            subject = subject.decode(encoding if encoding else "utf-8")
+        from_ = msg.get("From")
+        date_ = msg.get("Date")
+
+        print("From:", from_)
+        print("Subject:", subject)
+        print("Date:", date_)
+
+        # If the email message is multipart
+        if msg.is_multipart():
+            for part in msg.walk():
+                # Check if part is text/plain or text/html
+                if part.get_content_type() == "text/plain" and part.get("Content-Disposition") is None:
+                    body = part.get_payload(decode=True).decode()
+                    print("Body:", body)
+                    break
+        else:
+            # If the email message is not multipart
+            body = msg.get_payload(decode=True).decode()
+            print("Body:", body)
+
+# Close the connection and logout
+mail.close()
+mail.logout()
