@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"io"
 	"log"
 	"net"
@@ -13,6 +14,7 @@ func main() {
 		log.Println(err)
 		return
 	}
+	fmt.Println("Lsitening on ... localhost:6379")
 	connection, err := listener.Accept()
 	if err != nil {
 		log.Println(err)
@@ -30,5 +32,6 @@ func main() {
 			os.Exit(1)
 
 		}
+		connection.Write([]byte("+OK\r\n"))
 	}
 }
