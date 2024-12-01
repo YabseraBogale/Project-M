@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"image/png"
 	"log"
 	"os"
 	"time"
@@ -20,7 +21,15 @@ func main() {
 		if err != nil {
 			log.Println(err)
 		}
-		filename := fmt.Sprintf("%s.png", time.Now())
-		imgfile, err := os.Create("")
+		filename := fmt.Sprintf("./uploads/%s.png", time.Now())
+		imgfile, err := os.Create(filename)
+		if err != nil {
+			log.Println(err)
+		}
+		err = png.Encode(imgfile, img)
+		if err != nil {
+			log.Println(err)
+		}
+		time.Sleep(3 * time.Second)
 	}
 }
