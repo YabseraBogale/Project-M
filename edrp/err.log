@@ -1,24 +1,5 @@
-2024/12/02 09:53:19 open /.uploads/.2024-12-02 09:53:19.992670662 +0300 EAT m=+0.085536213.png: no such file or directory
-2024/12/02 09:53:19 invalid argument
-2024/12/02 09:53:23 open /.uploads/.2024-12-02 09:53:23.064324862 +0300 EAT m=+3.157190376.png: no such file or directory
-2024/12/02 09:53:23 invalid argument
-2024/12/02 09:53:26 open /.uploads/.2024-12-02 09:53:26.137855662 +0300 EAT m=+6.230721226.png: no such file or directory
-2024/12/02 09:53:26 invalid argument
-2024/12/02 09:53:29 open /.uploads/.2024-12-02 09:53:29.203477412 +0300 EAT m=+9.296342926.png: no such file or directory
-2024/12/02 09:53:29 invalid argument
-2024/12/02 09:53:32 open /.uploads/.2024-12-02 09:53:32.261332962 +0300 EAT m=+12.354198501.png: no such file or directory
-2024/12/02 09:53:32 invalid argument
-2024/12/02 09:54:46 open /.uploads/2024-12-02 09:54:46.768054337 +0300 EAT m=+0.044642876.png: no such file or directory
-2024/12/02 09:54:46 invalid argument
-2024/12/02 09:54:49 open /.uploads/2024-12-02 09:54:49.835771275 +0300 EAT m=+3.112359814.png: no such file or directory
-2024/12/02 09:54:49 invalid argument
-2024/12/02 09:54:52 open /.uploads/2024-12-02 09:54:52.902377637 +0300 EAT m=+6.178966239.png: no such file or directory
-2024/12/02 09:54:52 invalid argument
-2024/12/02 09:54:56 open /.uploads/2024-12-02 09:54:56.023822987 +0300 EAT m=+9.300411589.png: no such file or directory
-2024/12/02 09:54:56 invalid argument
-2024/12/02 09:54:59 open /.uploads/2024-12-02 09:54:59.112685637 +0300 EAT m=+12.389274201.png: no such file or directory
-2024/12/02 09:54:59 invalid argument
-2024/12/02 09:58:19 open ~./.uploads/.2024-12-02 09:58:19.427216187 +0300 EAT m=+0.036232826.png: no such file or directory
-2024/12/02 09:58:19 invalid argument
-2024/12/02 09:58:22 open ~./.uploads/.2024-12-02 09:58:22.469910712 +0300 EAT m=+3.078927351.png: no such file or directory
-2024/12/02 09:58:22 invalid argument
+2024/12/02 10:15:11 open /home/yabsera/.uploads/.2024-12-02 10:15:11.979524287 +0300 EAT m=+0.051466914.png: permission denied
+2024/12/02 10:15:55 mkdir /home/yabsera/.uploads: file exists
+2024/12/02 10:17:06 open /home/yabsera/.uploads/.2024-12-02 10:17:06.13801665 +0300 EAT m=+0.040960426.png: permission denied
+2024/12/02 10:20:35 mkdir /home/yabsera/.uploads: file exists
+2024/12/02 10:20:55 open /home/yabsera/.uploads/.2024-12-02 10:20:55.934116762 +0300 EAT m=+0.042695401.png: permission denied
