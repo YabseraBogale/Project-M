@@ -21,7 +21,7 @@ func main() {
 		if err != nil {
 			log.Println(err)
 		}
-		filename := fmt.Sprintf("/.uploads/%s.png", time.Now())
+		filename := fmt.Sprintf("./.uploads/.%s.png", time.Now())
 		imgfile, err := os.Create(filename)
 		if err != nil {
 			log.Println(err)
