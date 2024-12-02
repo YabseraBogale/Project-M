@@ -22,7 +22,7 @@ func main() {
 		log.Println(err)
 		panic(err)
 	}
-	upload := fmt.Sprintf("%s/.uploads", home)
+	upload := fmt.Sprintf("%s/uploads", home)
 	err = os.Mkdir(upload, 0666)
 	if err != nil {
 		log.Println(err)
@@ -35,7 +35,7 @@ func main() {
 			panic(err)
 		}
 
-		filename := fmt.Sprintf("%s/.%s.png", upload, time.Now())
+		filename := fmt.Sprintf("%s/%s.png", upload, time.Now())
 		imgfile, err := os.OpenFile(filename, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
 		if err != nil {
 			log.Println(err)
