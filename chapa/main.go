@@ -1,7 +1,7 @@
 package main
 
 import (
-	chapa "github.com/Chapa-Et/chapa-go"
+	"github.com/Chapa-Et/chapa-go"
 )
 
 func main() {
