@@ -1,27 +1,15 @@
 import os
+from flask import Flask,render_template
 from chapa import Chapa
+import requests
+import json
 
 chapa_api=os.getenv("api")
-chapa=Chapa(chapa_api)
-print(chapa_api)
+app=Flask(__name__)
 
+@app.route("/")
+def index():
+    return render_template("index.html")
 
-# # Initialize the payment
-# response = chapa.initialize(
-#     email="yabserapython@gmail.com",
-#     amount=1000,
-#     first_name="John",
-#     last_name="Doe",
-#     tx_ref="txn_123456",
-   
-# )
-
-# if response["status"] == "success":
-#     # Redirect user to the payment link
-#     print("Payment Link:", response["data"]["checkout_url"])
-# else:
-#     print("Failed to initialize payment:", response)
-
-transaction_id = ""
-verification_response = chapa.verify(transaction_id)
-print(verification_response)
+if __name__=="__main__":
+    app.run(debug=True)
