@@ -12,7 +12,9 @@ The good parts are 1,5,6
 The bad parts are 2,3,4
 
 
-Things to check how far can some on go without external libary 
+Things to check how far can some on go without external libary
+
+I have checked and it seems that rust have small stdl so use it with modern pc 
     
         
 
