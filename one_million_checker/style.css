@@ -5,13 +5,14 @@ body{
 }
 ul{
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(10px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(1px, 1fr));
     gap: 20px;
+    row-gap: 1px; 
     list-style: none;
-    padding: 20px;
+    padding: 10px;
     background: #fff;
     border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4x rgba(0, 0, 0, 0.1);
     width: 80%;
     max-width: 600px;
 }
