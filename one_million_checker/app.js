@@ -1,13 +1,9 @@
 const ul=document.getElementById("ul")
 
 const frame=document.createDocumentFragment()
-for(let i=0;i<1000;i++){
-    const tr=document.createElement("tr")
-    for(let j=0;j<1000;j++){
-        const td=document.createElement("td")
-        td.innerHTML="<input type='checkbox'>"
-        tr.appendChild(td)
-    }
-    frame.appendChild(tr)
+for(let i=0;i<100;i++){
+    const li=document.createElement("li")
+    li.innerHTML="<input type='checkbox'>"
+    frame.appendChild(li)
 }
 ul.appendChild(frame)
