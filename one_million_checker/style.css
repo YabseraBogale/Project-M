@@ -3,6 +3,9 @@ body{
     justify-content: center;
     align-items: center;
 }
+h2{
+    font-family: 'Courier New', Courier, monospace;
+}
 ul{
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(1px, 1fr));
