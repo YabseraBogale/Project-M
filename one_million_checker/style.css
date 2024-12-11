@@ -4,7 +4,7 @@ body{
     align-items: center;
 }
 h2{
-    font-family: 'Courier New', Courier, monospace;
+   font-family: 'Courier New', Courier, monospace;
 }
 ul{
     display: grid;
@@ -18,4 +18,5 @@ ul{
     box-shadow: 0 2px 4x rgba(0, 0, 0, 0.1);
     width: 80%;
     max-width: 600px;
+    
 }
