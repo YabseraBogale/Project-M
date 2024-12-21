@@ -10,3 +10,4 @@ headers = {
 url = "https://www.amazon.com/s?k=laptops&crid=3BVZ14BC0I8V7&sprefix=laptop%2Caps%2C970&ref=nb_sb_noss_1"
 response = requests.get(url,headers=headers)
 
+# moving to see
