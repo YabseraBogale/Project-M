@@ -1,0 +1,14 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background: linear-gradient(to bottom, orange, red);
+    color: white;
+  }
+  button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background: yellow;
+    border: none;
+    cursor: pointer;
+  }
+  
