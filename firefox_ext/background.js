@@ -1,3 +1,3 @@
-chrome.runtime.onInstalled.addListener(() => {
+firefox.runtime.onInstalled.addListener(() => {
   console.log("Fire Extension Installed!");
 });

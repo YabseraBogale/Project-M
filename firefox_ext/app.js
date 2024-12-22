@@ -1,1 +1,1 @@
-console.log("Fire Extension is active on this page!");
+console.log(document.contentType)
