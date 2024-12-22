@@ -1,5 +1,3 @@
-document.getElementById("fire-action").addEventListener("click", () => {
-    console.log("Fire Activated!");
-    alert("Fire Action Triggered!");
-  });
-  
+chrome.runtime.onInstalled.addListener(() => {
+  console.log("Fire Extension Installed!");
+});
